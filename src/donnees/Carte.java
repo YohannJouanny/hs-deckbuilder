@@ -1,0 +1,154 @@
+package donnees;
+
+import java.io.Serializable;
+
+
+public class Carte implements Comparable<Carte>, Serializable {
+	private static final long serialVersionUID = 3660480832339357858L;
+
+
+	public enum Type {
+		Arme,
+		Sort,
+		Serviteur;
+	}
+	
+	private class Exemplaires implements Serializable {	
+		private static final long serialVersionUID = -8051128287696286379L;
+		
+		private int nbCarteNormale;
+		private int nbCarteDoree;
+		
+		public Exemplaires() {
+			nbCarteNormale = 0;
+			nbCarteDoree = 0;
+		}
+		
+		public void reset() {
+			nbCarteNormale = 0;
+			nbCarteDoree = 0;
+		}
+	}
+	
+	
+	
+	private String nom;
+	private int mana;
+	private Classe classe;
+	private Type type;
+	private Rarete rarete;
+	private Extension extension;
+	private Exemplaires exemplaires;
+	
+	
+	
+	public Carte(String nom, int mana, Classe classe, Type type, Rarete rarete, Extension ext) {
+		this.nom = nom;
+		this.mana = mana;
+		this.classe = classe;
+		this.type = type;
+		this.rarete = rarete;
+		this.extension = ext;
+		exemplaires = new Exemplaires();
+	}
+	
+	
+	
+	public String getNom() {
+		return nom;
+	}
+	
+	public int getMana() {
+		return mana;
+	}
+	
+	public Classe getClasse() {
+		return classe;
+	}
+	
+	public Rarete getRarete() {
+		return rarete;
+	}
+	
+	public Extension getExtension() {
+		return extension;
+	}
+	
+	public int getNbCarteNormalePossede() {
+		return exemplaires.nbCarteNormale;
+	}
+	
+	public int getNbCarteDoreePossede() {
+		return exemplaires.nbCarteDoree;
+	}
+	
+	
+	
+	public void ajouterCarteNormale() {
+		if ((exemplaires.nbCarteNormale < 2 && rarete != Rarete.Legendaire)  || (rarete == Rarete.Legendaire && exemplaires.nbCarteNormale < 1))
+			exemplaires.nbCarteNormale++;
+	}
+	
+	public void ajouterCarteDoree() {
+		if ((exemplaires.nbCarteDoree < 2 && rarete != Rarete.Legendaire)  || (rarete == Rarete.Legendaire && exemplaires.nbCarteDoree < 1))
+			exemplaires.nbCarteDoree++;
+	}
+	
+	public void enleverCarteNormale() {
+		if (exemplaires.nbCarteNormale > 0)
+			exemplaires.nbCarteNormale--;
+	}
+	
+	public void enleverCarteDoree() {
+		if (exemplaires.nbCarteDoree > 0)
+			exemplaires.nbCarteDoree--;
+	}
+	
+	public void resetPossessions() {
+		exemplaires.reset();
+	}
+	
+	
+	
+	
+	public boolean equals(Carte c) {
+		if (!c.nom.equals(nom))
+			return false;
+		
+		if (c.mana != mana)
+			return false;
+		
+		if (c.classe != classe)
+			return false;
+		
+		if (c.type != type)
+			return false;
+		
+		if (c.rarete != rarete)
+			return false;
+		
+		if (c.extension != extension)
+			return false;
+		
+		return true;
+	}
+	
+	
+	public int compareTo(Carte c) {
+		if (classe.compareTo(c.classe) != 0)
+			return classe.compareTo(c.classe);
+		
+		if (mana - c.mana != 0)
+			return mana - c.mana;
+		
+		if (type.compareTo(c.type) != 0)
+			return type.compareTo(c.type);
+		
+		return nom.compareTo(c.nom);
+	}
+}
+
+
+
+
+
