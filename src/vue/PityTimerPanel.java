@@ -2,14 +2,12 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import donnees.Classe;
 import donnees.Extension;
 import model.PityTimerModel;
 
@@ -29,9 +26,12 @@ public class PityTimerPanel extends MainFramePanel {
 	private PityTimerModel model;
 	private boolean archiveMode;
 	
+	private JScrollPane tableauTimerCourants;
+	private JScrollPane tableauTimerArchives;
 	private JComboBox<Extension> selectExt;
 	private JButton incButton;
 	private JButton decButton;
+	private JButton resetButton;
 	private JButton exportButton;
 	private JButton archivesButton;
 	private JButton retourButton;
@@ -86,7 +86,7 @@ public class PityTimerPanel extends MainFramePanel {
 		JPanel panCritExtCB = new JPanel();
 		selectExt = new JComboBox<Extension>();
 		for (Extension ext : Extension.values()) {
-			if (!ext.isAventure() && ext.isStandard())
+			if (!ext.isAventure())
 				selectExt.addItem(ext);
 		}
 		selectExt.addActionListener(new ActionListener(){
@@ -101,32 +101,70 @@ public class PityTimerPanel extends MainFramePanel {
 		
 		
 		// Panel Est : Boutons Timer
-		JPanel panBoutonsTimer = new JPanel();
+		JPanel panBoutonsTimer = new JPanel(new GridLayout(10, 1));
 		
-		incButton = new JButton("Incrémenter le timer");
-		incButton.setFont(new Font("Arial", Font.BOLD, 16));
+		JPanel panVoidButton = new JPanel();
+		panBoutonsTimer.add(panVoidButton);
+		
+		JPanel panVoid2Button = new JPanel();
+		panBoutonsTimer.add(panVoid2Button);
+		
+		JPanel panIncButton = new JPanel();
+		incButton = new JButton("Timer +");
+		incButton.setFont(new Font("Arial", Font.BOLD, 20));
 		incButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				model.incrementeTimer();
 			}
 		});
-		panBoutonsTimer.add(incButton);
+		panIncButton.add(incButton);
+		panBoutonsTimer.add(panIncButton);
 		
-		decButton = new JButton("Décrémenter le timer");
+		JPanel panVoid3Button = new JPanel();
+		panBoutonsTimer.add(panVoid3Button);
+		
+		JPanel panDecButton = new JPanel();
+		decButton = new JButton("Timer -");
 		decButton.setFont(new Font("Arial", Font.BOLD, 16));
-		panBoutonsTimer.add(decButton);
+		decButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				model.decrementeTimer();
+			}
+		});
+		panDecButton.add(decButton);
+		panBoutonsTimer.add(panDecButton);
+		
+		JPanel panRestButton = new JPanel();
+		resetButton = new JButton("Annuler");
+		resetButton.setFont(new Font("Arial", Font.BOLD, 16));
+		resetButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				model.reloadData();
+			}
+		});
+		panRestButton.add(resetButton);
+		panBoutonsTimer.add(panRestButton);
 		
 		panControl.add(panBoutonsTimer, BorderLayout.CENTER);
 		
 		
 		// Panel Est : Boutons switch
 		JPanel panBoutonsSwitch = new JPanel();
+		panBoutonsSwitch.setLayout(new BoxLayout(panBoutonsSwitch, BoxLayout.Y_AXIS));
 		
-		exportButton = new JButton("Exporter en CVS");
+		JPanel panExportButton = new JPanel();
+		exportButton = new JButton("Exporter CSV");
 		exportButton.setFont(new Font("Arial", Font.BOLD, 16));
-		panBoutonsSwitch.add(exportButton);
+		exportButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				model.exportCSV();
+			}
+		});
+		panExportButton.add(exportButton);
+		panBoutonsSwitch.add(panExportButton);
 		exportButton.setVisible(false);
 		
+		JPanel panArchivesButton = new JPanel();
 		archivesButton = new JButton("Archives");
 		archivesButton.setFont(new Font("Arial", Font.BOLD, 16));
 		archivesButton.addActionListener(new ActionListener(){
@@ -134,8 +172,10 @@ public class PityTimerPanel extends MainFramePanel {
 				switchMode();
 			}
 		});
-		panBoutonsSwitch.add(archivesButton);
+		panArchivesButton.add(archivesButton);
+		panBoutonsSwitch.add(panArchivesButton);
 		
+		JPanel panRetourButton = new JPanel();
 		retourButton = new JButton("Retour");
 		retourButton.setFont(new Font("Arial", Font.BOLD, 16));
 		retourButton.addActionListener(new ActionListener(){
@@ -143,7 +183,8 @@ public class PityTimerPanel extends MainFramePanel {
 				switchMode();
 			}
 		});
-		panBoutonsSwitch.add(retourButton);
+		panRetourButton.add(retourButton);
+		panBoutonsSwitch.add(panRetourButton);
 		retourButton.setVisible(false);
 		
 		panControl.add(panBoutonsSwitch, BorderLayout.SOUTH);
@@ -159,16 +200,32 @@ public class PityTimerPanel extends MainFramePanel {
 		
 		
 		
-		// PANEL CENTRAL : TABLEAU DE STATS
-		JTable tableauStats = new JTable(model.getPityTimerTableModel());
-		tableauStats.setCellSelectionEnabled(false);
-		tableauStats.setRowHeight(30);
+		// PANEL CENTRAL : TABLEAU DE PITY TIMER - COURANT
+		JTable tableTimerCourants = new JTable(model.getPityTimerTableModel());
+		tableTimerCourants.setCellSelectionEnabled(false);
+		tableTimerCourants.setRowHeight(37);
 		
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-		tableauStats.setDefaultRenderer(String.class, centerRenderer);
+		tableTimerCourants.setDefaultRenderer(String.class, centerRenderer);
 		
-		this.add(new JScrollPane(tableauStats), BorderLayout.CENTER);
+		ArchiverTimerTableCell tableCellArchiver = new ArchiverTimerTableCell(model);
+		tableTimerCourants.setDefaultRenderer(int.class, tableCellArchiver);
+		tableTimerCourants.setDefaultEditor(int.class, tableCellArchiver);
+		
+		tableauTimerCourants = new JScrollPane(tableTimerCourants);
+		this.add(tableauTimerCourants, BorderLayout.CENTER);
+		
+		
+		// PANEL CENTRAL : TABLEAU DE PITY TIMER - ARCHIVES
+		JTable tableTimerArchives = new JTable(model.getPityTimerArchivesTableModel());
+		tableTimerArchives.setCellSelectionEnabled(false);
+		tableTimerArchives.setRowHeight(30);
+		
+		tableTimerArchives.setDefaultRenderer(String.class, centerRenderer);
+		
+		tableauTimerArchives = new JScrollPane(tableTimerArchives);
+		
 	}
 	
 	
@@ -179,17 +236,23 @@ public class PityTimerPanel extends MainFramePanel {
 			archiveMode = false;
 			incButton.setVisible(true);
 			decButton.setVisible(true);
+			resetButton.setVisible(true);
 			exportButton.setVisible(false);
 			archivesButton.setVisible(true);
 			retourButton.setVisible(false);
+			this.remove(tableauTimerArchives);
+			this.add(tableauTimerCourants, BorderLayout.CENTER);
 		}
 		else {
 			archiveMode = true;
 			incButton.setVisible(false);
 			decButton.setVisible(false);
+			resetButton.setVisible(false);
 			exportButton.setVisible(true);
 			archivesButton.setVisible(false);
 			retourButton.setVisible(true);
+			this.remove(tableauTimerCourants);
+			this.add(tableauTimerArchives, BorderLayout.CENTER);
 		}
 	}
 	

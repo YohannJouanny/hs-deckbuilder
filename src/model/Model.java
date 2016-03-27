@@ -26,7 +26,7 @@ public class Model {
 		
 		modelLC = new ListeCartesModel(this);
 		modelStats = new StatsModel(this);
-		modelPT = new PityTimerModel(this);
+		modelPT = new PityTimerModel();
 	}
 	
 	
@@ -88,6 +88,7 @@ public class Model {
 	public void saveModel() {
 		saveExtensions();
 		saveListe();
+		modelPT.savePityTimerData();
 	}
 	
 	

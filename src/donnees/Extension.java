@@ -95,14 +95,3 @@ public class Extension implements Serializable {
 
 
 
-//Base ("Jeu de base"),
-//Classique ("Classique"),
-//Naxxramas ("Naxxramas"),
-//Gvg ("Gobelins et gnomes"),
-//Rochenoire ("Mont Rochenoire"),
-//Tgt ("Le Grand Tournoi"),
-//Loe ("Ligue des explorateurs"),
-//All ("Tous les jeux");
-
-
-

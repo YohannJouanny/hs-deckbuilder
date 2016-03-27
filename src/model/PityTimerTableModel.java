@@ -32,7 +32,7 @@ public class PityTimerTableModel extends AbstractTableModel{
 	}
 	
 	public int getRowCount() {
-		return PityTimerModel.rarete.length;
+		return timerCourants.length;
 	}
 	
 	public String getColumnName(int col) {
