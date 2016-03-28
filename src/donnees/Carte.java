@@ -39,6 +39,7 @@ public class Carte implements Comparable<Carte>, Serializable {
 	private Rarete rarete;
 	private Extension extension;
 	private Exemplaires exemplaires;
+	private boolean isInteressante;
 	
 	
 	
@@ -50,6 +51,7 @@ public class Carte implements Comparable<Carte>, Serializable {
 		this.rarete = rarete;
 		this.extension = ext;
 		exemplaires = new Exemplaires();
+		this.isInteressante = false;
 	}
 	
 	
@@ -82,6 +84,10 @@ public class Carte implements Comparable<Carte>, Serializable {
 		return exemplaires.nbCarteDoree;
 	}
 	
+	public boolean isInteressante() {
+		return isInteressante;
+	}
+	
 	
 	
 	public void ajouterCarteNormale() {
@@ -106,6 +112,11 @@ public class Carte implements Comparable<Carte>, Serializable {
 	
 	public void resetPossessions() {
 		exemplaires.reset();
+	}
+	
+	
+	public void setInteressante(boolean arg) {
+		isInteressante = arg;
 	}
 	
 	

@@ -40,11 +40,11 @@ public class PityTimerTableModel extends AbstractTableModel{
 			case Rarete:
 				return "Rareté";
 			case ValMax:
-				return "Valeur Max";
+				return "Timer Max";
 			case ValActuelle:
-				return "Valeur actuelle";
+				return "Timer";
 			case Action:
-				return "Action";
+				return "Archiver";
 			default:
 				return null;
 		}

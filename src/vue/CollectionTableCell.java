@@ -45,7 +45,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		
 		// BOUTON CARTE NORMALE 1
 		JTBCarteNormale button1N = new JTBCarteNormale();
-		button1N.setLocation(panelHorizontalCenter - 5 - 20 - 10 - 20, 5);
+		button1N.setLocation(panelHorizontalCenter - 4 - 20 - 8 - 20, 5);
 		
 		if (carte.getNbCarteNormalePossede() >= 1)
 			button1N.setSelected(true);
@@ -71,7 +71,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		// BOUTON CARTE NORMALE 2
 		if (carte.getRarete() != Rarete.Legendaire) {
 			JTBCarteNormale button2N = new JTBCarteNormale();
-			button2N.setLocation(panelHorizontalCenter - 5 - 20, 5);
+			button2N.setLocation(panelHorizontalCenter - 4 - 20, 5);
 			
 			if (carte.getNbCarteNormalePossede() >= 2)
 				button2N.setSelected(true);
@@ -93,14 +93,14 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 			panel.add(button2N);
 		}
 		else {
-			button1N.setLocation(panelHorizontalCenter - 5 - 20, 5);
+			button1N.setLocation(panelHorizontalCenter - 4 - 20, 5);
 		}
 		
 		
 		
 		// BOUTON CARTE DOREE 1
 		JTBCarteDoree button1D = new JTBCarteDoree();
-		button1D.setLocation(panelHorizontalCenter + 5, 5);
+		button1D.setLocation(panelHorizontalCenter + 4, 5);
 		
 		if (carte.getNbCarteDoreePossede() >= 1)
 			button1D.setSelected(true);
@@ -126,7 +126,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		// BOUTON CARTE DOREE 2
 		if (carte.getRarete() != Rarete.Legendaire) {
 			JTBCarteDoree button2D = new JTBCarteDoree();
-			button2D.setLocation(panelHorizontalCenter + 5 + 20 + 10, 5);
+			button2D.setLocation(panelHorizontalCenter + 4 + 20 + 8, 5);
 			
 			if (carte.getNbCarteDoreePossede() >= 2)
 				button2D.setSelected(true);
@@ -160,7 +160,6 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 	
 	
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-		editorValue = value;
 		Carte carte = (Carte) value;
 		
 		int panelWidth = table.getColumnModel().getColumn(column).getPreferredWidth();
@@ -176,7 +175,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		
 		// BOUTON CARTE NORMALE 1
 		JTBCarteNormale button1N = new JTBCarteNormale();
-		button1N.setLocation(panelHorizontalCenter - 5 - 20 - 10 - 20, 5);
+		button1N.setLocation(panelHorizontalCenter - 4 - 20 - 8 - 20, 5);
 		
 		if (carte.getNbCarteNormalePossede() >= 1)
 			button1N.setSelected(true);
@@ -188,7 +187,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		// BOUTON CARTE NORMALE 2
 		if (carte.getRarete() != Rarete.Legendaire) {
 			JTBCarteNormale button2N = new JTBCarteNormale();
-			button2N.setLocation(panelHorizontalCenter - 5 - 20, 5);
+			button2N.setLocation(panelHorizontalCenter - 4 - 20, 5);
 			
 			if (carte.getNbCarteNormalePossede() >= 2)
 				button2N.setSelected(true);
@@ -196,14 +195,14 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 			panel.add(button2N);
 		}
 		else {
-			button1N.setLocation(panelHorizontalCenter - 5 - 20, 5);
+			button1N.setLocation(panelHorizontalCenter - 4 - 20, 5);
 		}
 		
 		
 		
 		// BOUTON CARTE DOREE 1
 		JTBCarteDoree button1D = new JTBCarteDoree();
-		button1D.setLocation(panelHorizontalCenter + 5, 5);
+		button1D.setLocation(panelHorizontalCenter + 4, 5);
 		
 		if (carte.getNbCarteDoreePossede() >= 1)
 			button1D.setSelected(true);
@@ -215,7 +214,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		// BOUTON CARTE DOREE 2
 		if (carte.getRarete() != Rarete.Legendaire) {
 			JTBCarteDoree button2D = new JTBCarteDoree();
-			button2D.setLocation(panelHorizontalCenter + 5 + 20 + 10, 5);
+			button2D.setLocation(panelHorizontalCenter + 4 + 20 + 8, 5);
 			
 			if (carte.getNbCarteDoreePossede() >= 2)
 				button2D.setSelected(true);

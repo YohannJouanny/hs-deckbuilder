@@ -29,7 +29,7 @@ public class SupprimerCarteTableCell extends AbstractCellEditor implements Table
 		renderPanel.setBackground(Color.white);
 		
 		SupprimerButton renderButton = new SupprimerButton();
-		renderButton.setLocation(70,5);
+		renderButton.setLocation(57,5);
 		renderPanel.add(renderButton);
 		
 		
@@ -37,7 +37,7 @@ public class SupprimerCarteTableCell extends AbstractCellEditor implements Table
 		editPanel.setBackground(Color.white);
 		
 		SupprimerButton editButton = new SupprimerButton();
-		editButton.setLocation(70,5);
+		editButton.setLocation(57,5);
 		editButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				fireEditingStopped();

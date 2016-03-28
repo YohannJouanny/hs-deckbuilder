@@ -4,6 +4,7 @@ import donnees.Carte;
 import donnees.Classe;
 import donnees.Extension;
 import donnees.Rarete;
+import model.ListeCartesTableModel.TypeColonne;
 
 
 public class ListeCartesModel {
@@ -61,14 +62,15 @@ public class ListeCartesModel {
 	}
 	
 	
-	public void changeTitres(boolean editMode) {
+	public void switchTable(boolean editMode) {
 		if (editMode) {
-			String titres[] = {"Mana", "Nom", "Classe", "Extension", "Supprimer carte"};
-			listeCarteTM.changeTitres(titres);
+			TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, TypeColonne.Extension, TypeColonne.Suppression};
+			listeCarteTM.changeColonnes(types);
 		}
 		else {
-			String titres[] = {"Mana", "Nom", "Classe", "Extension", "Collection"};
-			listeCarteTM.changeTitres(titres);
+			TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, 
+									TypeColonne.Extension, TypeColonne.Collection, TypeColonne.Interet};
+			listeCarteTM.changeColonnes(types);
 		}
 	}
 	
@@ -91,14 +93,10 @@ public class ListeCartesModel {
 	
 	
 	private void initListeCartesTableModel() {
-		String titres[] = {"Mana", "Nom", "Classe", "Extension", "Collection"};
-		ListeCartesTableModel.TypeColonne colonnes[] = { ListeCartesTableModel.TypeColonne.CoutMana,
-															ListeCartesTableModel.TypeColonne.Nom,
-															ListeCartesTableModel.TypeColonne.Classe,
-															ListeCartesTableModel.TypeColonne.Extension,
-															ListeCartesTableModel.TypeColonne.Action };
+		TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, 
+				TypeColonne.Extension, TypeColonne.Collection, TypeColonne.Interet};
 		
-		listeCarteTM = new ListeCartesTableModel(titres, colonnes, new ListeCartes());
+		listeCarteTM = new ListeCartesTableModel(types, new ListeCartes());
 	}
 }
 

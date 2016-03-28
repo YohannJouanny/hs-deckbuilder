@@ -18,17 +18,17 @@ public class ListeCartesTableModel extends AbstractTableModel {
 		Classe,
 		Rarete,
 		Extension,
-		Action;
+		Collection,
+		Suppression,
+		Interet;
 	}
 	
 	
-	private String[] titres;
 	private TypeColonne[] types;
 	private ListeCartes listeCartes;
 	
 	
-	public ListeCartesTableModel(String[] titres, TypeColonne[] types, ListeCartes liste) {
-		this.titres = titres;
+	public ListeCartesTableModel(TypeColonne[] types, ListeCartes liste) {
 		this.types = types;
 		this.listeCartes = liste;
 	}
@@ -36,7 +36,7 @@ public class ListeCartesTableModel extends AbstractTableModel {
 	
 	
 	public int getColumnCount() {
-		return titres.length;
+		return types.length;
 	}
 
 	public int getRowCount() {
@@ -44,7 +44,26 @@ public class ListeCartesTableModel extends AbstractTableModel {
 	}
 	
 	public String getColumnName(int col) {
-		return titres[col];
+		switch (types[col]) {
+			case Nom:
+				return "Nom";
+			case CoutMana:
+				return "Mana";
+			case Classe:
+				return "Classe";
+			case Rarete:
+				return "Rareté";
+			case Extension:
+				return "Extension";
+			case Collection:
+				return "Collection";
+			case Suppression:
+				return "Supprimer carte";
+			case Interet:
+				return "Intérêt";
+			default:
+				return null;
+		}
 	}
 	
 	public Class<?> getColumnClass(int col) {
@@ -59,8 +78,12 @@ public class ListeCartesTableModel extends AbstractTableModel {
 				return Rarete.class;
 			case Extension:
 				return Extension.class;
-			case Action:
+			case Collection:
 				return Carte.class;
+			case Suppression:
+				return Carte.class;
+			case Interet:
+				return boolean.class;
 			default:
 				return null;
 		}
@@ -79,7 +102,11 @@ public class ListeCartesTableModel extends AbstractTableModel {
 				return listeCartes.getCarte(row).getRarete();
 			case Extension:
 				return listeCartes.getCarte(row).getExtension();
-			case Action:
+			case Collection:
+				return listeCartes.getCarte(row);
+			case Suppression:
+				return listeCartes.getCarte(row);
+			case Interet:
 				return listeCartes.getCarte(row);
 			default:
 				return null;
@@ -92,10 +119,14 @@ public class ListeCartesTableModel extends AbstractTableModel {
 	
 	
 	public boolean isCellEditable(int row, int col) {
-		if (types[col] == TypeColonne.Action)
-			return true;
-		
-		return false;
+		switch (types[col]) {
+			case Collection:
+			case Suppression:
+			case Interet:
+				return true;
+			default:
+				return false;
+		}
 	}
 	
 	
@@ -105,8 +136,8 @@ public class ListeCartesTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 	
-	public void changeTitres(String[] titres) {
-		this.titres = titres;
+	public void changeColonnes(TypeColonne[] types) {
+		this.types = types;
 		this.fireTableStructureChanged();
 	}
 }

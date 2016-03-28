@@ -129,7 +129,7 @@ public class CreerExtensionPopUp extends JDialog {
 		JLabel nomLb = new JLabel("Nom : ");
 		panInfoNom.add(nomLb);
 		nomTF = new JTextField();
-		nomTF.setColumns(15);
+		nomTF.setColumns(12);
 		panInfoNom.add(nomTF);
 		panInfos.add(panInfoNom);
 		

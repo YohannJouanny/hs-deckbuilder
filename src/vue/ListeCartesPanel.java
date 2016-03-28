@@ -54,6 +54,8 @@ public class ListeCartesPanel extends MainFramePanel {
 	public void refresh() {
 		if (editMode)
 			switchMode();
+		else
+			refreshTableau();
 		
 		selectClasse.setSelectedItem(Classe.All);
 		manaRBGroup.getElements().nextElement().setSelected(true);
@@ -275,11 +277,6 @@ public class ListeCartesPanel extends MainFramePanel {
 		tableauCartes.setFillsViewportHeight(true);
 		tableauCartes.setCellSelectionEnabled(false);
 		tableauCartes.setRowHeight(30);
-		tableauCartes.getColumnModel().getColumn(0).setPreferredWidth(40);
-		tableauCartes.getColumnModel().getColumn(1).setPreferredWidth(221);
-		tableauCartes.getColumnModel().getColumn(2).setPreferredWidth(80);
-		tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(140);
-		tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(160);
 		
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -290,6 +287,10 @@ public class ListeCartesPanel extends MainFramePanel {
 		CollectionTableCell tableCellCollec = new CollectionTableCell();
 		tableauCartes.setDefaultRenderer(Carte.class, tableCellCollec);
 		tableauCartes.setDefaultEditor(Carte.class, tableCellCollec);
+		
+		InteretTableCell tableCellInteret = new InteretTableCell();
+		tableauCartes.setDefaultRenderer(boolean.class, tableCellInteret);
+		tableauCartes.setDefaultEditor(boolean.class, tableCellInteret);
 		
 		
 		this.add(new JScrollPane(tableauCartes), BorderLayout.CENTER);
@@ -348,13 +349,8 @@ public class ListeCartesPanel extends MainFramePanel {
 	
 	
 	private void refreshTableau() {
-		model.changeTitres(editMode);
-		tableauCartes.getColumnModel().getColumn(0).setPreferredWidth(40);
-		tableauCartes.getColumnModel().getColumn(1).setPreferredWidth(221);
-		tableauCartes.getColumnModel().getColumn(2).setPreferredWidth(80);
-		tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(140);
-		tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(160);
-		
+		model.switchTable(editMode);
+		setColumnsPreferredSize();
 		
 		if (editMode) {
 			SupprimerCarteTableCell tableCell = new SupprimerCarteTableCell(model);
@@ -365,6 +361,26 @@ public class ListeCartesPanel extends MainFramePanel {
 			CollectionTableCell tableCellCollec = new CollectionTableCell();
 			tableauCartes.setDefaultRenderer(Carte.class, tableCellCollec);
 			tableauCartes.setDefaultEditor(Carte.class, tableCellCollec);
+		}
+	}
+	
+	
+	private void setColumnsPreferredSize() {
+		if (editMode) {
+			tableauCartes.getColumnModel().getColumn(0).setPreferredWidth(42);
+			tableauCartes.getColumnModel().getColumn(1).setPreferredWidth(210);
+			tableauCartes.getColumnModel().getColumn(2).setPreferredWidth(85);
+			tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(151);
+			tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(134);
+		}
+		else {
+			tableauCartes.getColumnModel().getColumn(0).setPreferredWidth(40);
+			tableauCartes.getColumnModel().getColumn(1).setPreferredWidth(190);
+			tableauCartes.getColumnModel().getColumn(2).setPreferredWidth(75);
+			tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(145);
+			tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(127);
+			tableauCartes.getColumnModel().getColumn(5).setPreferredWidth(45);
+			
 		}
 	}
 
