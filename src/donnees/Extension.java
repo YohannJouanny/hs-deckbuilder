@@ -22,7 +22,8 @@ public class Extension implements Serializable {
 			listeExt = (ArrayList<Extension>)ois.readObject();
 			ois.close();
 		} catch (FileNotFoundException e) {
-			System.err.println("Fichier \"extensions.data\" introuvable !");
+			createExtension("Jeu de base", true, true);
+			createExtension("Classique", false, true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,8 +35,10 @@ public class Extension implements Serializable {
 	}
 	
 	
-	public static void createExtension(String nom, boolean isAdv, boolean isStandard) {
-		listeExt.add(new Extension(nom, isAdv, isStandard));
+	public static Extension createExtension(String nom, boolean isAdv, boolean isStandard) {
+		Extension ext = new Extension(nom, isAdv, isStandard);
+		listeExt.add(ext);
+		return ext;
 	}
 	
 	public static void deleteExtension(Extension ext) {

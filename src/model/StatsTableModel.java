@@ -47,6 +47,11 @@ public class StatsTableModel extends AbstractTableModel {
 	}
 	
 	
+	public void updateTitres(String[] titres) {
+		this.titres = titres;
+		fireTableStructureChanged();
+	}
+	
 	public void updateData(String[][] data) {
 		this.data = data;
 		fireTableDataChanged();

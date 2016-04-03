@@ -66,6 +66,12 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
+		itemStatsBooster.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				vue.changeEcran(Ecran.StatsBooster);
+			}
+		});
+		
 		itemPityTimer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				vue.changeEcran(Ecran.PityTimer);

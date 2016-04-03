@@ -71,25 +71,23 @@ public class StatsModel {
 		int total = 0;
 		
 		
-		for (Carte carte : liste) {
-			if ((carte.getClasse() == classe || classe == Classe.All) && (carte.getRarete() == rarete || rarete == Rarete.All)) {
-				if (critereCN) {
-					possedees += carte.getNbCarteNormalePossede();
-					
-					if (carte.getRarete() == Rarete.Legendaire)
-						total++;
-					else
-						total += 2;
-				}
+		for (Carte carte : liste.getListeFiltree(Extension.ALL, classe, rarete)) {
+			if (critereCN) {
+				possedees += carte.getNbCarteNormalePossede();
 				
-				if (critereCD) {
-					possedees += carte.getNbCarteDoreePossede();
-					
-					if (carte.getRarete() == Rarete.Legendaire)
-						total++;
-					else
-						total += 2;
-				}
+				if (carte.getRarete() == Rarete.Legendaire)
+					total++;
+				else
+					total += 2;
+			}
+			
+			if (critereCD) {
+				possedees += carte.getNbCarteDoreePossede();
+				
+				if (carte.getRarete() == Rarete.Legendaire)
+					total++;
+				else
+					total += 2;
 			}
 		}
 		

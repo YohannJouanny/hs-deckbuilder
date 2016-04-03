@@ -34,11 +34,10 @@ public class StatsPanel extends MainFramePanel {
 	public StatsPanel(StatsModel model) {
 		this.model = model;
 		initPanel();
-		refresh();
 	}
 
 	
-
+	
 	public void refresh() {
 		extAllChB.setSelected(true);
 		for (JCheckBox extChB : listeExtChB) {

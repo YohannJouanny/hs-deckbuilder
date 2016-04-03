@@ -8,6 +8,7 @@ public class Vue {
 	public enum Ecran {
 		Liste,
 		Stats,
+		StatsBooster,
 		PityTimer;
 	}
 	
@@ -17,6 +18,7 @@ public class Vue {
 	private MainFramePanel panelActif;
 	private ListeCartesPanel panelListe;
 	private StatsPanel panelStats;
+	private StatsBoosterPanel panelStatsBooster;
 	private PityTimerPanel panelPityTimer;
 	
 	
@@ -35,6 +37,7 @@ public class Vue {
 	private void buildPanels() {
 		panelListe = new ListeCartesPanel(model.getListeCartesModel());
 		panelStats = new StatsPanel(model.getStatsModel());
+		panelStatsBooster = new StatsBoosterPanel(model.getStatsBoosterModel());
 		panelPityTimer = new PityTimerPanel(model.getPityTimerModel());
 	}
 	
@@ -45,6 +48,8 @@ public class Vue {
 			changeEcran(Ecran.Liste);
 		else if (panelActif.getClass() == StatsPanel.class) 
 			changeEcran(Ecran.Stats);
+		else if (panelActif.getClass() == StatsBoosterPanel.class) 
+			changeEcran(Ecran.StatsBooster);
 		else if (panelActif.getClass() == PityTimerPanel.class) 
 			changeEcran(Ecran.PityTimer);
 		else 
@@ -59,6 +64,9 @@ public class Vue {
 				break;
 			case Stats:
 				panelActif = panelStats;
+				break;
+			case StatsBooster:
+				panelActif = panelStatsBooster;
 				break;
 			case PityTimer:
 				panelActif = panelPityTimer;

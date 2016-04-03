@@ -18,6 +18,7 @@ public class Model {
 	private ListeCartesModel modelLC;
 	private StatsModel modelStats;
 	private PityTimerModel modelPT;
+	private StatsBoosterModel modelSB;
 	
 	
 	public Model() {
@@ -26,6 +27,7 @@ public class Model {
 		
 		modelLC = new ListeCartesModel(this);
 		modelStats = new StatsModel(this);
+		modelSB = new StatsBoosterModel(this);
 		modelPT = new PityTimerModel();
 	}
 	
@@ -47,6 +49,10 @@ public class Model {
 	
 	public StatsModel getStatsModel() {
 		return modelStats;
+	}
+	
+	public StatsBoosterModel getStatsBoosterModel() {
+		return modelSB;
 	}
 	
 	public PityTimerModel getPityTimerModel() {
@@ -80,9 +86,11 @@ public class Model {
 	
 	
 	
+	
 	public void loadModel() {
 		loadExtensions();
 		loadListe();
+		refreshListeCarteExtPointer();
 	}
 	
 	public void saveModel() {
@@ -126,6 +134,15 @@ public class Model {
 			oos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	private void refreshListeCarteExtPointer() {
+		for (Carte c : listeCartes) {
+			c.refreshExtensionPointer();
 		}
 	}
 	

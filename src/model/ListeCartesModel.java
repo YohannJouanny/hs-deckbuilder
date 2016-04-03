@@ -78,13 +78,9 @@ public class ListeCartesModel {
 	private void actualiseTable() {
 		ListeCartes liste = new ListeCartes();
 		
-		for (Carte c : model.getListeCartes()) {
+		for (Carte c : model.getListeCartes().getListeFiltree(critereExtension, critereClasse, Rarete.All)) {
 			if (critereMana == -1 || c.getMana() == critereMana || (critereMana == 7 && c.getMana() >= critereMana)) {
-				if (critereClasse == Classe.All || c.getClasse()  == critereClasse) {
-					if (critereExtension.equals(Extension.ALL) || c.getExtension().equals(critereExtension)) {
-						liste.ajouterCarte(c);
-					}
-				}
+				liste.ajouterCarte(c);
 			}
 		}
 		

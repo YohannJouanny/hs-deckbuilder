@@ -90,13 +90,27 @@ public class Carte implements Comparable<Carte>, Serializable {
 	
 	
 	
+	public boolean hasMaxCarteNormale() {
+		if (exemplaires.nbCarteNormale >= 2 || (rarete == Rarete.Legendaire && exemplaires.nbCarteNormale >= 1))
+			return true;
+		
+		return false;
+	}
+	
+	public boolean hasMaxCarteDoree() {
+		if (exemplaires.nbCarteDoree >= 2 || (rarete == Rarete.Legendaire && exemplaires.nbCarteDoree >= 1))
+			return true;
+		
+		return false;
+	}
+	
 	public void ajouterCarteNormale() {
-		if ((exemplaires.nbCarteNormale < 2 && rarete != Rarete.Legendaire)  || (rarete == Rarete.Legendaire && exemplaires.nbCarteNormale < 1))
+		if (!hasMaxCarteNormale())
 			exemplaires.nbCarteNormale++;
 	}
 	
 	public void ajouterCarteDoree() {
-		if ((exemplaires.nbCarteDoree < 2 && rarete != Rarete.Legendaire)  || (rarete == Rarete.Legendaire && exemplaires.nbCarteDoree < 1))
+		if (!hasMaxCarteDoree())
 			exemplaires.nbCarteDoree++;
 	}
 	
@@ -120,6 +134,17 @@ public class Carte implements Comparable<Carte>, Serializable {
 	}
 	
 	
+	
+	public void refreshExtensionPointer() {
+		for (Extension ext : Extension.values()) {
+			if (extension.equals(ext)) {
+				extension = ext;
+				return;
+			}
+		}
+		
+		extension = Extension.createExtension(extension.getNom(), extension.isAventure(), extension.isStandard());
+	}
 	
 	
 	public boolean equals(Carte c) {

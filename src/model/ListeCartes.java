@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import donnees.Carte;
+import donnees.Classe;
+import donnees.Extension;
+import donnees.Rarete;
 
 
 public class ListeCartes implements Iterable<Carte>, Serializable {
@@ -51,6 +54,23 @@ public class ListeCartes implements Iterable<Carte>, Serializable {
 
 	public Iterator<Carte> iterator() {
 		return liste.iterator();
+	}
+	
+	
+	
+	public ListeCartes getListeFiltree(Extension extension, Classe classe, Rarete rarete) {
+		ListeCartes res = new ListeCartes();
+		
+		for (Carte c : liste) {
+			if (extension.equals(Extension.ALL) || c.getExtension().equals(extension)) {
+				if (classe == Classe.All || c.getClasse() == classe) {
+					if (rarete == Rarete.All || c.getRarete() == rarete)
+						res.ajouterCarte(c);
+				}
+			}
+		}
+		
+		return res;
 	}
 	
 	
