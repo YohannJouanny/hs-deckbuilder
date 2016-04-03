@@ -63,6 +63,7 @@ public class Model {
 	
 	public void creerExtension(String nom, boolean isAdv, boolean isStandard) {
 		Extension.createExtension(nom, isAdv, isStandard);
+		modelPT.notifyAjoutExtension();
 	}
 	
 	public void editerExtension(Extension ext, boolean isAventure, boolean isStandard) {
@@ -70,6 +71,9 @@ public class Model {
 	}
 	
 	public void supprimerExtention(Extension ext) {
+		int indexExt = Extension.values().indexOf(ext);
+		
+		
 		for (int i = 0; i < listeCartes.size(); i++) {
 			Carte c = listeCartes.getCarte(i);
 			
@@ -80,7 +84,9 @@ public class Model {
 				
 		}
 		
+		
 		Extension.deleteExtension(ext);
+		modelPT.notifySuppressionExtension(indexExt);
 	}
 	
 	

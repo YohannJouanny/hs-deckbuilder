@@ -47,8 +47,6 @@ public class PityTimerModel {
 	
 	public PityTimerModel() {
 		this.extension = Extension.values().get(0);
-		this.timerCourants = new int[Extension.values().size()][rarete.length];
-		this.timerArchives = new int[Extension.values().size()][rarete.length][];
 		loadPityTimerData();
 		
 		pityTimerTM = new PityTimerTableModel(timerCourants[Extension.values().indexOf(extension)]);
@@ -119,8 +117,6 @@ public class PityTimerModel {
 	
 	
 	public void reloadData() {
-		this.timerCourants = new int[Extension.values().size()][rarete.length];
-		this.timerArchives = new int[Extension.values().size()][rarete.length][];
 		loadPityTimerData();
 		
 		pityTimerTM.updateData(timerCourants[Extension.values().indexOf(extension)]);
@@ -163,14 +159,73 @@ public class PityTimerModel {
 	
 	
 	
+	public void notifyAjoutExtension() {
+		int[][] tempTC = timerCourants;
+		int[][][] tempTA = timerArchives;
+		
+		timerCourants = new int[Extension.values().size()][rarete.length];
+		timerArchives = new int[Extension.values().size()][rarete.length][];
+		initArchives();
+		
+		
+		for (int i = 0; i < Extension.values().size() - 1; i++) {
+			timerCourants[i] = tempTC[i];
+			timerArchives[i] = tempTA[i];
+		}
+		
+		savePityTimerData();
+	}
+	
+	
+	public void notifySuppressionExtension(int indexExt) {
+		int[][] tempTC = timerCourants;
+		int[][][] tempTA = timerArchives;
+		
+		timerCourants = new int[Extension.values().size()][rarete.length];
+		timerArchives = new int[Extension.values().size()][rarete.length][];
+		initArchives();
+		
+		
+		int j = 0;
+		
+		for (int i = 0; i < Extension.values().size() + 1; i++) {
+			if (i != indexExt) {
+				timerCourants[j] = tempTC[i];
+				timerArchives[j] = tempTA[i];
+				j++;
+			}
+		}
+		
+		
+		savePityTimerData();
+	}
+	
+	
+	
+	
+	
 	private void loadPityTimerData() {
+		timerCourants = new int[Extension.values().size()][rarete.length];
+		timerArchives = new int[Extension.values().size()][rarete.length][];
+		initArchives();
+		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("pitytimer.data"))));
-			timerCourants = (int[][])ois.readObject();
-			timerArchives = (int[][][])ois.readObject();
+			
+			int[][] tempTC = (int[][])ois.readObject();
+			int[][][] tempTA = (int[][][])ois.readObject();
+			
+			
+			if (tempTC.length == Extension.values().size())
+				timerCourants = tempTC;
+			
+			if (tempTA.length == Extension.values().size())
+				timerArchives = tempTA;
+			
+			
 			ois.close();
 		} catch (FileNotFoundException e) {
-			initArchives();
+			// Do nothing, not an error
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -196,6 +251,10 @@ public class PityTimerModel {
 			}
 		}
 	}
+	
+	
+	
+	
 	
 	
 	
