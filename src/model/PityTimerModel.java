@@ -47,8 +47,8 @@ public class PityTimerModel {
 	
 	public PityTimerModel() {
 		this.extension = Extension.values().get(0);
-		loadManualy();
-		//loadPityTimerData();
+		//loadManualy();
+		loadPityTimerData();
 		
 		pityTimerTM = new PityTimerTableModel(timerCourants[Extension.values().indexOf(extension)]);
 		pityTimerArchivesTM = new PityTimerArchivesTableModel(timerArchives[Extension.values().indexOf(extension)]);
