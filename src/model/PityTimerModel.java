@@ -47,7 +47,8 @@ public class PityTimerModel {
 	
 	public PityTimerModel() {
 		this.extension = Extension.values().get(0);
-		loadPityTimerData();
+		loadManualy();
+		//loadPityTimerData();
 		
 		pityTimerTM = new PityTimerTableModel(timerCourants[Extension.values().indexOf(extension)]);
 		pityTimerArchivesTM = new PityTimerArchivesTableModel(timerArchives[Extension.values().indexOf(extension)]);
@@ -260,19 +261,67 @@ public class PityTimerModel {
 	
 	@SuppressWarnings("unused")
 	private void loadManualy() {
-		//Classique
-		timerCourants[1][0] = 0;
-		timerCourants[1][1] = 0;
-		timerCourants[1][2] = 0;
-		timerCourants[1][3] = 0;
-		timerCourants[1][4] = 0;
-		timerCourants[1][5] = 0;
-		
-		
+		timerCourants = new int[Extension.values().size()][rarete.length];
+		timerArchives = new int[Extension.values().size()][rarete.length][];
 		initArchives();
 		
-		timerArchives[1][1] = new int[1];
-		timerArchives[1][1][0] = 0;
+		
+		
+		//Classique
+		timerCourants[1][0] = 0;
+		timerCourants[1][1] = 1;
+		timerCourants[1][2] = 3;
+		timerCourants[1][3] = 12;
+		timerCourants[1][4] = 12;
+		timerCourants[1][5] = 12;
+		
+		
+		timerArchives[1][0] = new int[1];
+		timerArchives[1][0][0] = 7;
+		timerArchives[1][1] = new int[0];
+		timerArchives[1][2] = new int[1];
+		timerArchives[1][2][0] = 8;
+		timerArchives[1][3] = new int[0];
+		timerArchives[1][4] = new int[0];
+		timerArchives[1][5] = new int[0];
+		
+		
+		
+		//GVG
+		timerCourants[3][0] = 5;
+		timerCourants[3][1] = 17;
+		timerCourants[3][2] = 10;
+		timerCourants[3][3] = 8;
+		timerCourants[3][4] = 17;
+		timerCourants[3][5] = 17;
+		
+		
+		timerArchives[3][0] = new int[1];
+		timerArchives[3][0][0] = 8;
+		timerArchives[3][1] = new int[0];
+		timerArchives[3][2] = new int[0];
+		timerArchives[3][3] = new int[0];
+		timerArchives[3][4] = new int[0];
+		timerArchives[3][5] = new int[0];
+		
+		
+		
+		//TGT
+		timerCourants[5][0] = 0;
+		timerCourants[5][1] = 0;
+		timerCourants[5][2] = 0;
+		timerCourants[5][3] = 0;
+		timerCourants[5][4] = 0;
+		timerCourants[5][5] = 0;
+		
+		
+		timerArchives[5][0] = new int[0];
+		timerArchives[5][1] = new int[0];
+		timerArchives[5][2] = new int[0];
+		timerArchives[5][3] = new int[0];
+		timerArchives[5][4] = new int[0];
+		timerArchives[5][5] = new int[0];
+		
 	}
 	
 	

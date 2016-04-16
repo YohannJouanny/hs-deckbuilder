@@ -38,7 +38,7 @@ public class CreerCartePopUp extends JDialog {
 	
 	
 	public CreerCartePopUp(JFrame frame) {
-		super(frame, "Creer une carte", true);
+		super(frame, "Créer une carte", true);
 		
 		this.setSize(400, 400);
 		this.setResizable(false);
@@ -104,7 +104,7 @@ public class CreerCartePopUp extends JDialog {
 		
 		// PANEL NORD : TITRE
 		JPanel panTitre = new JPanel();
-		JLabel titre = new JLabel("Creer une carte");
+		JLabel titre = new JLabel("Créer une carte");
 		titre.setFont(new Font("Arial", Font.BOLD, 24));
 		panTitre.add(titre);
 		panel.add(panTitre, BorderLayout.NORTH);

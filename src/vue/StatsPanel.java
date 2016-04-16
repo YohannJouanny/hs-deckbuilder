@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import model.StatsModel;
 import donnees.Extension;
@@ -162,11 +161,10 @@ public class StatsPanel extends MainFramePanel {
 		// PANEL CENTRAL : TABLEAU DE STATS
 		JTable tableauStats = new JTable(model.getStatsTableModel());
 		tableauStats.setCellSelectionEnabled(false);
-		tableauStats.setRowHeight(30);
+		tableauStats.setRowHeight(43);
 		
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-		tableauStats.setDefaultRenderer(String.class, centerRenderer);
+		StatsStringTableCell stringRenderer = new StatsStringTableCell();
+		tableauStats.setDefaultRenderer(String.class, stringRenderer);
 		
 		this.add(new JScrollPane(tableauStats), BorderLayout.CENTER);
 	}
