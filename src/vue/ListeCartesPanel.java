@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import donnees.Carte;
 import donnees.Classe;
 import donnees.Extension;
+import donnees.Rarete;
 import model.ListeCartesModel;
 
 
@@ -33,6 +34,7 @@ public class ListeCartesPanel extends MainFramePanel {
 	
 	private JTable tableauCartes;
 	private JComboBox<Classe> selectClasse;
+	private JComboBox<Rarete> selectRarete;
 	private JComboBox<Extension> selectExt;
 	private ButtonGroup manaRBGroup;
 	private JButton editButton;
@@ -182,6 +184,31 @@ public class ListeCartesPanel extends MainFramePanel {
 		
 		
 		
+		JPanel panCritSud = new JPanel();
+		panCritSud.setLayout(new BoxLayout(panCritSud, BoxLayout.Y_AXIS));
+		
+		// Panel Critere : Critere rarete
+		JPanel panCritRarete = new JPanel();
+		panCritRarete.setLayout(new BoxLayout(panCritRarete, BoxLayout.Y_AXIS));
+		
+		JLabel selectRareteLb = new JLabel("Rareté :");
+		selectRareteLb.setAlignmentX(CENTER_ALIGNMENT);
+		panCritRarete.add(selectRareteLb);
+		
+		JPanel panCritRareteCB = new JPanel();
+		selectRarete = new JComboBox<Rarete>();
+		selectRarete.addItem(Rarete.All);
+		for (Rarete rarete : Rarete.values()) {
+			if (rarete != Rarete.All)
+				selectRarete.addItem(rarete);
+		}
+		selectRarete.addActionListener(createActualiseListeActionListener());
+		panCritRareteCB.add(selectRarete);
+		panCritRarete.add(panCritRareteCB);
+		
+		panCritSud.add(panCritRarete);
+		
+				
 		// Panel Critere : Critere extension
 		JPanel panCritExt = new JPanel();
 		panCritExt.setLayout(new BoxLayout(panCritExt, BoxLayout.Y_AXIS));
@@ -200,8 +227,8 @@ public class ListeCartesPanel extends MainFramePanel {
 		panCritExtCB.add(selectExt);
 		panCritExt.add(panCritExtCB);
 		
-		panCritere.add(panCritExt, BorderLayout.SOUTH);
-		
+		panCritSud.add(panCritExt);
+		panCritere.add(panCritSud, BorderLayout.SOUTH);
 		
 		
 		// Panel Critere : Critere cout en mana
@@ -292,6 +319,9 @@ public class ListeCartesPanel extends MainFramePanel {
 		tableauCartes.setDefaultRenderer(boolean.class, tableCellInteret);
 		tableauCartes.setDefaultEditor(boolean.class, tableCellInteret);
 		
+		RareteTableCell rareteTableCell = new RareteTableCell();
+		tableauCartes.setDefaultRenderer(Rarete.class, rareteTableCell);
+		
 		
 		this.add(new JScrollPane(tableauCartes), BorderLayout.CENTER);
 	}
@@ -306,9 +336,10 @@ public class ListeCartesPanel extends MainFramePanel {
 			public void actionPerformed(ActionEvent arg0) {
 				int cout = getSelectedManaButton().getValue();
 				Classe classe = (Classe)selectClasse.getSelectedItem();
+				Rarete rarete = (Rarete)selectRarete.getSelectedItem();
 				Extension ext = (Extension)selectExt.getSelectedItem();
 				
-				model.changeCriteres(cout, classe, ext);
+				model.changeCriteres(cout, classe, rarete, ext);
 			}
 		};
 	}
@@ -370,16 +401,18 @@ public class ListeCartesPanel extends MainFramePanel {
 			tableauCartes.getColumnModel().getColumn(0).setPreferredWidth(42);
 			tableauCartes.getColumnModel().getColumn(1).setPreferredWidth(210);
 			tableauCartes.getColumnModel().getColumn(2).setPreferredWidth(85);
-			tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(151);
-			tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(134);
+			tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(40);
+			tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(151);
+			tableauCartes.getColumnModel().getColumn(5).setPreferredWidth(134);
 		}
 		else {
 			tableauCartes.getColumnModel().getColumn(0).setPreferredWidth(40);
 			tableauCartes.getColumnModel().getColumn(1).setPreferredWidth(190);
 			tableauCartes.getColumnModel().getColumn(2).setPreferredWidth(75);
-			tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(145);
-			tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(127);
-			tableauCartes.getColumnModel().getColumn(5).setPreferredWidth(45);
+			tableauCartes.getColumnModel().getColumn(3).setPreferredWidth(40);
+			tableauCartes.getColumnModel().getColumn(4).setPreferredWidth(145);
+			tableauCartes.getColumnModel().getColumn(5).setPreferredWidth(127);
+			tableauCartes.getColumnModel().getColumn(6).setPreferredWidth(40);
 			
 		}
 	}

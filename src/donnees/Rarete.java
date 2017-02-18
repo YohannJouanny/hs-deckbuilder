@@ -6,7 +6,7 @@ public enum Rarete {
 	Rare ("Rare"),
 	Epique ("Epique"),
 	Legendaire ("Légendaire"),
-	All ("");
+	All ("Toutes les cartes");
 	
 	
 	private String nom;

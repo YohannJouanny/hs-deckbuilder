@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
 
 	public MainFrame(Vue vue, Model model) {
 		this.setTitle("Hearthstone Stats");
-		this.setSize(800, 600);
+		this.setSize(900, 600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);

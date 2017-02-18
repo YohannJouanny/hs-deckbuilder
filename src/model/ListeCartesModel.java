@@ -13,6 +13,7 @@ public class ListeCartesModel {
 	
 	private int critereMana;
 	private Classe critereClasse;
+	private Rarete critereRarete;
 	private Extension critereExtension;
 	
 	
@@ -20,6 +21,7 @@ public class ListeCartesModel {
 		this.model = model;
 		critereMana = -1;
 		critereClasse = Classe.All;
+		critereRarete = Rarete.All;
 		critereExtension = Extension.ALL;
 		
 		initListeCartesTableModel();
@@ -31,9 +33,10 @@ public class ListeCartesModel {
 		return listeCarteTM;
 	}
 	
-	public void changeCriteres(int coutMana, Classe classe, Extension ext) {
+	public void changeCriteres(int coutMana, Classe classe, Rarete rarete, Extension ext) {
 		critereMana = coutMana;
 		critereClasse = classe;
+		critereRarete = rarete;
 		critereExtension = ext;
 		actualiseTable();
 	}
@@ -64,11 +67,12 @@ public class ListeCartesModel {
 	
 	public void switchTable(boolean editMode) {
 		if (editMode) {
-			TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, TypeColonne.Extension, TypeColonne.Suppression};
+			TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, TypeColonne.Rarete, 
+									TypeColonne.Extension, TypeColonne.Suppression};
 			listeCarteTM.changeColonnes(types);
 		}
 		else {
-			TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, 
+			TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, TypeColonne.Rarete,
 									TypeColonne.Extension, TypeColonne.Collection, TypeColonne.Interet};
 			listeCarteTM.changeColonnes(types);
 		}
@@ -78,7 +82,7 @@ public class ListeCartesModel {
 	private void actualiseTable() {
 		ListeCartes liste = new ListeCartes();
 		
-		for (Carte c : model.getListeCartes().getListeFiltree(critereExtension, critereClasse, Rarete.All)) {
+		for (Carte c : model.getListeCartes().getListeFiltree(critereExtension, critereClasse, critereRarete)) {
 			if (critereMana == -1 || c.getMana() == critereMana || (critereMana == 7 && c.getMana() >= critereMana)) {
 				liste.ajouterCarte(c);
 			}
@@ -89,8 +93,8 @@ public class ListeCartesModel {
 	
 	
 	private void initListeCartesTableModel() {
-		TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, 
-				TypeColonne.Extension, TypeColonne.Collection, TypeColonne.Interet};
+		TypeColonne[] types = {TypeColonne.CoutMana, TypeColonne.Nom, TypeColonne.Classe, TypeColonne.Rarete,
+								TypeColonne.Extension, TypeColonne.Collection, TypeColonne.Interet};
 		
 		listeCarteTM = new ListeCartesTableModel(types, new ListeCartes());
 	}

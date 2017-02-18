@@ -18,7 +18,7 @@ public class JTBInteret extends JToggleButton {
 	
 	public JTBInteret() {
 		imgSelected = new ImageIcon("resources/buttons/JTBI_selected.png").getImage();
-		imgUnselected = new ImageIcon("resources/buttons/JTBI_unselected2.png").getImage();
+		imgUnselected = new ImageIcon("resources/buttons/JTBI_unselected.png").getImage();
 		
 		this.setBorderPainted(false);
 		this.setSize(20, 20);

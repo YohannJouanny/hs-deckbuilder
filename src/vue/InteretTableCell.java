@@ -33,7 +33,7 @@ public class InteretTableCell extends AbstractCellEditor implements TableCellRen
 		
 		int panelWidth = table.getColumnModel().getColumn(column).getPreferredWidth();
 		int panelHeight = table.getRowHeight();
-		int panelHorizontalCenter = panelWidth/2;
+		int panelHorizontalCenter = panelWidth/2 + 3; //Offset de règlage bidouille
 		
 		
 		JPanel panel = new JPanel(null);
@@ -76,7 +76,7 @@ public class InteretTableCell extends AbstractCellEditor implements TableCellRen
 		
 		int panelWidth = table.getColumnModel().getColumn(column).getPreferredWidth();
 		int panelHeight = table.getRowHeight();
-		int panelHorizontalCenter = panelWidth/2;
+		int panelHorizontalCenter = panelWidth/2 + 3; //Offset de règlage bidouille
 		
 		
 		JPanel panel = new JPanel(null);

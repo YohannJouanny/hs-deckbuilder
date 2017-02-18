@@ -34,7 +34,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		
 		int panelWidth = table.getColumnModel().getColumn(column).getPreferredWidth();
 		int panelHeight = table.getRowHeight();
-		int panelHorizontalCenter = panelWidth/2;
+		int panelHorizontalCenter = panelWidth/2 + 3; //Offset de règlage bidouille
 		
 		
 		
@@ -164,7 +164,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 		
 		int panelWidth = table.getColumnModel().getColumn(column).getPreferredWidth();
 		int panelHeight = table.getRowHeight();
-		int panelHorizontalCenter = panelWidth/2;
+		int panelHorizontalCenter = panelWidth/2 + 3; //Offset de règlage bidouille
 		
 		
 		
