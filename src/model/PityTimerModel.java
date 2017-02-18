@@ -268,19 +268,21 @@ public class PityTimerModel {
 		
 		
 		//Classique
-		timerCourants[1][0] = 0;
-		timerCourants[1][1] = 1;
-		timerCourants[1][2] = 3;
-		timerCourants[1][3] = 12;
-		timerCourants[1][4] = 12;
-		timerCourants[1][5] = 12;
+		timerCourants[1][0] = 4;
+		timerCourants[1][1] = 0;
+		timerCourants[1][2] = 1;
+		timerCourants[1][3] = 16;
+		timerCourants[1][4] = 16;
+		timerCourants[1][5] = 16;
 		
 		
 		timerArchives[1][0] = new int[1];
 		timerArchives[1][0][0] = 7;
-		timerArchives[1][1] = new int[0];
-		timerArchives[1][2] = new int[1];
+		timerArchives[1][1] = new int[1];
+		timerArchives[1][1][0] = 5;
+		timerArchives[1][2] = new int[2];
 		timerArchives[1][2][0] = 8;
+		timerArchives[1][2][1] = 6;
 		timerArchives[1][3] = new int[0];
 		timerArchives[1][4] = new int[0];
 		timerArchives[1][5] = new int[0];
@@ -288,19 +290,26 @@ public class PityTimerModel {
 		
 		
 		//GVG
-		timerCourants[3][0] = 5;
-		timerCourants[3][1] = 17;
-		timerCourants[3][2] = 10;
+		timerCourants[3][0] = 1;
+		timerCourants[3][1] = 13;
+		timerCourants[3][2] = 4;
 		timerCourants[3][3] = 8;
-		timerCourants[3][4] = 17;
-		timerCourants[3][5] = 17;
+		timerCourants[3][4] = 39;
+		timerCourants[3][5] = 7;
 		
 		
-		timerArchives[3][0] = new int[1];
+		timerArchives[3][0] = new int[5];
 		timerArchives[3][0][0] = 8;
+		timerArchives[3][0][1] = 8;
+		timerArchives[3][0][2] = 9;
+		timerArchives[3][0][3] = 3;
+		timerArchives[3][0][4] = 6;
 		timerArchives[3][1] = new int[0];
-		timerArchives[3][2] = new int[0];
-		timerArchives[3][3] = new int[0];
+		timerArchives[3][2] = new int[2];
+		timerArchives[3][2][0] = 17;
+		timerArchives[3][2][1] = 11;
+		timerArchives[3][3] = new int[1];
+		timerArchives[3][3][0] = 22;
 		timerArchives[3][4] = new int[0];
 		timerArchives[3][5] = new int[0];
 		
@@ -321,6 +330,50 @@ public class PityTimerModel {
 		timerArchives[5][3] = new int[0];
 		timerArchives[5][4] = new int[0];
 		timerArchives[5][5] = new int[0];
+
+		
+		
+		//OG
+		timerCourants[7][0] = 3;
+		timerCourants[7][1] = 12;
+		timerCourants[7][2] = 6;
+		timerCourants[7][3] = 2;
+		timerCourants[7][4] = 32;
+		timerCourants[7][5] = 65;
+		
+		
+		timerArchives[7][0] = new int[11];
+		timerArchives[7][0][0] = 6;
+		timerArchives[7][0][1] = 6;
+		timerArchives[7][0][2] = 8;
+		timerArchives[7][0][3] = 5;
+		timerArchives[7][0][4] = 9;
+		timerArchives[7][0][5] = 8;
+		timerArchives[7][0][6] = 1;
+		timerArchives[7][0][7] = 5;
+		timerArchives[7][0][8] = 6;
+		timerArchives[7][0][9] = 0;
+		timerArchives[7][0][10] = 8;
+		timerArchives[7][1] = new int[3];
+		timerArchives[7][1][0] = 18;
+		timerArchives[7][1][1] = 13;
+		timerArchives[7][1][2] = 22;
+		timerArchives[7][2] = new int[5];
+		timerArchives[7][2][0] = 8;
+		timerArchives[7][2][1] = 7;
+		timerArchives[7][2][2] = 14;
+		timerArchives[7][2][3] = 17;
+		timerArchives[7][2][4] = 13;
+		timerArchives[7][3] = new int[4];
+		timerArchives[7][3][0] = 22;
+		timerArchives[7][3][1] = 16;
+		timerArchives[7][3][2] = 18;
+		timerArchives[7][3][3] = 7;
+		timerArchives[7][4] = new int[1];
+		timerArchives[7][4][0] = 33;
+		timerArchives[7][5] = new int[0];
+		
+		
 		
 	}
 	
