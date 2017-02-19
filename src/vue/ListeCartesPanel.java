@@ -109,7 +109,10 @@ public class ListeCartesPanel extends MainFramePanel {
 		addCarteButton.setFont(new Font("Arial", Font.BOLD, 16));
 		addCarteButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				CreerCartePopUp pop = new CreerCartePopUp(null);
+				CreerCartePopUp pop = new CreerCartePopUp(null, 
+						(Classe)selectClasse.getSelectedItem(), 
+						(Rarete)selectRarete.getSelectedItem(), 
+						(Extension)selectExt.getSelectedItem());
 				
 				if(pop.showPopUp())
 				{

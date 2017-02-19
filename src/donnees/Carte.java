@@ -177,9 +177,6 @@ public class Carte implements Comparable<Carte>, Serializable {
 		if (mana - c.mana != 0)
 			return mana - c.mana;
 		
-		if (type.compareTo(c.type) != 0)
-			return type.compareTo(c.type);
-		
 		return nom.compareTo(c.nom);
 	}
 }

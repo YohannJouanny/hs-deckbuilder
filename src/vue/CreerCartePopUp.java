@@ -48,6 +48,26 @@ public class CreerCartePopUp extends JDialog {
 		init();
 	}
 	
+	public CreerCartePopUp(JFrame frame, Classe classe, Rarete rarete, Extension ext) {
+		this(frame);
+		
+		if (classe != null) {
+			classeCB.setSelectedItem(classe);
+			
+			if (classe.equals(Classe.Neutre)) {
+				typeCB.setSelectedItem(Carte.Type.Serviteur);
+			}
+		}
+		
+		if (rarete != null) {
+			rareteCB.setSelectedItem(rarete);
+		}
+		
+		if (ext != null) {
+			extensionCB.setSelectedItem(ext);
+		}
+	}
+	
 	
 	public boolean showPopUp() {
 		this.setVisible(true);
