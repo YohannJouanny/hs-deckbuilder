@@ -18,8 +18,8 @@ public class JTBCarteDoree extends JToggleButton {
 	
 	
 	public JTBCarteDoree() {
-		imgSelected = new ImageIcon("resources/buttons/JTBD_selected.png").getImage();
-		imgUnselected = new ImageIcon("resources/buttons/JTBD_unselected.png").getImage();
+		imgSelected = new ImageIcon("resources/icons/buttons/Button_gold.png").getImage();
+		imgUnselected = new ImageIcon("resources/icons/buttons/Button_unselected.png").getImage();
 		
 		this.setBorderPainted(false);
 		this.setSize(20, 20);

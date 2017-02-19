@@ -20,10 +20,10 @@ public class RareteTableCell implements TableCellRenderer {
 	
 	
 	public RareteTableCell() {
-		imgCommune = new ImageIcon("resources/icons/Commune.png");
-		imgRare = new ImageIcon("resources/icons/Rare.png");
-		imgEpique = new ImageIcon("resources/icons/Epique.png");
-		imgLegendaire = new ImageIcon("resources/icons/Legendaire.png");
+		imgCommune = new ImageIcon("resources/icons/rarete/Commune.png");
+		imgRare = new ImageIcon("resources/icons/rarete/Rare.png");
+		imgEpique = new ImageIcon("resources/icons/rarete/Epique.png");
+		imgLegendaire = new ImageIcon("resources/icons/rarete/Legendaire.png");
 	}
 	
 	

@@ -18,8 +18,8 @@ public class JTBCarteNormale extends JToggleButton {
 	
 	
 	public JTBCarteNormale() {
-		imgSelected = new ImageIcon("resources/buttons/JTBN_selected.png").getImage();
-		imgUnselected = new ImageIcon("resources/buttons/JTBN_unselected.png").getImage();
+		imgSelected = new ImageIcon("resources/icons/buttons/Button_white.png").getImage();
+		imgUnselected = new ImageIcon("resources/icons/buttons/Button_unselected.png").getImage();
 		
 		this.setBorderPainted(false);
 		this.setSize(20, 20);
