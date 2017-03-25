@@ -16,7 +16,7 @@ public class SupprimerButton extends JButton {
 	
 	
 	public SupprimerButton() {
-		icone = new ImageIcon("resources/buttons/JB_supprimer.png").getImage();
+		icone = new ImageIcon("resources/icons/buttons/Button_delete.png").getImage();
 		
 		this.setBorderPainted(false);
 		this.setSize(20, 20);

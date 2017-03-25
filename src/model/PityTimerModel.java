@@ -268,15 +268,15 @@ public class PityTimerModel {
 		
 		
 		//Classique
-		timerCourants[1][0] = 7;
-		timerCourants[1][1] = 11;
-		timerCourants[1][2] = 16;
-		timerCourants[1][3] = 1;
-		timerCourants[1][4] = 58;
-		timerCourants[1][5] = 13;
+		timerCourants[1][0] = 0;
+		timerCourants[1][1] = 13;
+		timerCourants[1][2] = 18;
+		timerCourants[1][3] = 3;
+		timerCourants[1][4] = 60;
+		timerCourants[1][5] = 15;
 		
 		
-		timerArchives[1][0] = new int[15];
+		timerArchives[1][0] = new int[16];
 		timerArchives[1][0][0] = 7;
 		timerArchives[1][0][1] = 7;
 		timerArchives[1][0][2] = 6;
@@ -292,6 +292,7 @@ public class PityTimerModel {
 		timerArchives[1][0][12] = 0;
 		timerArchives[1][0][13] = 10;
 		timerArchives[1][0][14] = 8;
+		timerArchives[1][0][15] = 9;
 		timerArchives[1][1] = new int[6];
 		timerArchives[1][1][0] = 5;
 		timerArchives[1][1][1] = 6;
@@ -305,16 +306,13 @@ public class PityTimerModel {
 		timerArchives[1][2][2] = 18;
 		timerArchives[1][2][3] = 21;
 		timerArchives[1][2][4] = 17;
-		timerArchives[1][3] = new int[5];
-		timerArchives[1][3][0] = 22;
-		timerArchives[1][3][1] = 12;
-		timerArchives[1][3][2] = 26;
-		timerArchives[1][3][3] = 7;
-		timerArchives[1][3][4] = 19;
-		timerArchives[1][4] = new int[1];
-		timerArchives[1][4][0] = 29;
-		timerArchives[1][5] = new int[1];
-		timerArchives[1][5][0] = 74;
+		timerArchives[1][3] = new int[4];
+		timerArchives[1][3][0] = 12;
+		timerArchives[1][3][1] = 26;
+		timerArchives[1][3][2] = 7;
+		timerArchives[1][3][3] = 19;
+		timerArchives[1][4] = new int[0];
+		timerArchives[1][5] = new int[0];
 		
 		
 		
@@ -353,38 +351,33 @@ public class PityTimerModel {
 		timerCourants[5][5] = 64;
 		
 		
-		timerArchives[5][0] = new int[10];
-		timerArchives[5][0][0] = 8;
+		timerArchives[5][0] = new int[9];
+		timerArchives[5][0][0] = 9;
 		timerArchives[5][0][1] = 9;
-		timerArchives[5][0][2] = 9;
-		timerArchives[5][0][3] = 1;
-		timerArchives[5][0][4] = 9;
-		timerArchives[5][0][5] = 3;
+		timerArchives[5][0][2] = 1;
+		timerArchives[5][0][3] = 9;
+		timerArchives[5][0][4] = 3;
+		timerArchives[5][0][5] = 4;
 		timerArchives[5][0][6] = 4;
-		timerArchives[5][0][7] = 4;
-		timerArchives[5][0][8] = 1;
-		timerArchives[5][0][9] = 8;
-		timerArchives[5][1] = new int[4];
-		timerArchives[5][1][0] = 16;
-		timerArchives[5][1][1] = 10;
-		timerArchives[5][1][2] = 21;
-		timerArchives[5][1][3] = 17;
-		timerArchives[5][2] = new int[5];
-		timerArchives[5][2][0] = 1;
-		timerArchives[5][2][1] = 9;
-		timerArchives[5][2][2] = 14;
-		timerArchives[5][2][3] = 10;
-		timerArchives[5][2][4] = 20;
-		timerArchives[5][3] = new int[7];
-		timerArchives[5][3][0] = 4;
-		timerArchives[5][3][1] = 6;
-		timerArchives[5][3][2] = 3;
-		timerArchives[5][3][3] = 11;
-		timerArchives[5][3][4] = 23;
-		timerArchives[5][3][5] = 5;
-		timerArchives[5][3][6] = 9;
-		timerArchives[5][4] = new int[1];
-		timerArchives[5][4][0] = 27;
+		timerArchives[5][0][7] = 1;
+		timerArchives[5][0][8] = 8;
+		timerArchives[5][1] = new int[3];
+		timerArchives[5][1][0] = 10;
+		timerArchives[5][1][1] = 21;
+		timerArchives[5][1][2] = 17;
+		timerArchives[5][2] = new int[4];
+		timerArchives[5][2][0] = 9;
+		timerArchives[5][2][1] = 14;
+		timerArchives[5][2][2] = 10;
+		timerArchives[5][2][3] = 20;
+		timerArchives[5][3] = new int[6];
+		timerArchives[5][3][0] = 6;
+		timerArchives[5][3][1] = 3;
+		timerArchives[5][3][2] = 11;
+		timerArchives[5][3][3] = 23;
+		timerArchives[5][3][4] = 5;
+		timerArchives[5][3][5] = 9;
+		timerArchives[5][4] = new int[0];
 		timerArchives[5][5] = new int[0];
 
 		
@@ -451,12 +444,12 @@ public class PityTimerModel {
 		
 		
 		//Gadgetzan
-		timerCourants[9][0] = 3;
-		timerCourants[9][1] = 15;
-		timerCourants[9][2] = 12;
-		timerCourants[9][3] = 12;
-		timerCourants[9][4] = 2;
-		timerCourants[9][5] = 109;
+		timerCourants[9][0] = 4;
+		timerCourants[9][1] = 16;
+		timerCourants[9][2] = 13;
+		timerCourants[9][3] = 13;
+		timerCourants[9][4] = 3;
+		timerCourants[9][5] = 110;
 		
 		
 		timerArchives[9][0] = new int[17];
@@ -485,13 +478,14 @@ public class PityTimerModel {
 		timerArchives[9][1][4] = 1;
 		timerArchives[9][1][5] = 30;
 		timerArchives[9][1][6] = 5;
-		timerArchives[9][2] = new int[6];
-		timerArchives[9][2][0] = 40;
-		timerArchives[9][2][1] = 15;
-		timerArchives[9][2][2] = 3;
-		timerArchives[9][2][3] = 14;
-		timerArchives[9][2][4] = 22;
-		timerArchives[9][2][5] = 3;
+		timerArchives[9][2] = new int[7];
+		timerArchives[9][2][0] = 22;
+		timerArchives[9][2][1] = 18;
+		timerArchives[9][2][2] = 15;
+		timerArchives[9][2][3] = 3;
+		timerArchives[9][2][4] = 14;
+		timerArchives[9][2][5] = 22;
+		timerArchives[9][2][6] = 3;
 		timerArchives[9][3] = new int[6];
 		timerArchives[9][3][0] = 19;
 		timerArchives[9][3][1] = 6;
