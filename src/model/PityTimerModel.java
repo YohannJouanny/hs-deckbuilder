@@ -49,6 +49,7 @@ public class PityTimerModel {
 		this.extension = Extension.values().get(0);
 		//loadManualy();
 		loadPityTimerData();
+		//fixbugPantheon();
 		
 		pityTimerTM = new PityTimerTableModel(timerCourants[Extension.values().indexOf(extension)]);
 		pityTimerArchivesTM = new PityTimerArchivesTableModel(timerArchives[Extension.values().indexOf(extension)]);
@@ -499,6 +500,29 @@ public class PityTimerModel {
 		timerArchives[9][5] = new int[0];
 	}
 	
+	private void fixbugPantheon() {
+		int[] timerCourantsTEMP = timerCourants[10];
+		int[][] timerArchivesTEMP = timerArchives[10];
+		
+		timerCourants[10] = timerCourants[9];
+		timerArchives[10] = timerArchives[9];
+		timerCourants[9] = timerCourants[8];
+		timerArchives[9] = timerArchives[8];
+		timerCourants[8] = timerCourants[7];
+		timerArchives[8] = timerArchives[7];
+		timerCourants[7] = timerCourants[6];
+		timerArchives[7] = timerArchives[6];
+		timerCourants[6] = timerCourants[5];
+		timerArchives[6] = timerArchives[5];
+		timerCourants[5] = timerCourants[4];
+		timerArchives[5] = timerArchives[4];
+		timerCourants[4] = timerCourants[3];
+		timerArchives[4] = timerArchives[3];
+		timerCourants[3] = timerCourants[2];
+		timerArchives[3] = timerArchives[2];
+		timerCourants[2] = timerCourantsTEMP;
+		timerArchives[2] = timerArchivesTEMP;
+	}
 	
 	
 	
