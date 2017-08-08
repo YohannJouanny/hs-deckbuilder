@@ -327,7 +327,7 @@ public class StatsBoosterModel {
 			for (int j = 0; j < Rarete.values().length - 1; j++) {
 				double proba = 0.0;
 				
-				if (exts.get(i).isStandard() && nombreCarteData[i][j] != 0)
+				if (nombreCarteData[i][j] != 0)
 					proba = ((double)nbcNormaleData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[0][j];
 				
 				pbNormaleData[i][j] = proba;
@@ -458,7 +458,7 @@ public class StatsBoosterModel {
 			for (int j = 0; j < Rarete.values().length - 1; j++) {
 				double proba = 0.0;
 				
-				if (exts.get(i).isStandard() && nombreCarteData[i][j] != 0)
+				if (nombreCarteData[i][j] != 0)
 					proba = ((double)nbcDoreeData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[1][j];
 				
 				pbDoreeData[i][j] = proba;
@@ -565,17 +565,8 @@ public class StatsBoosterModel {
 				int compteur = 0;
 				
 				for (Carte c : model.getListeCartes().getListeFiltree(ext, Classe.All, rarete)) {
-					if (c.isInteressante()) {
-						int nbcPossedee = c.getNbCarteNormalePossede() + c.getNbCarteDoreePossede();
-						
-						if (c.getRarete() != Rarete.Legendaire) {
-							if (nbcPossedee < 2)
-								compteur++;
-						}
-						else {
-							if (nbcPossedee < 1)
-								compteur++;
-						}
+					if (c.isInteressante() && !c.hasMaxCarte()) {
+						compteur++;
 					}
 				}
 				
@@ -599,7 +590,7 @@ public class StatsBoosterModel {
 			for (int j = 0; j < Rarete.values().length - 1; j++) {
 				double proba = 0.0;
 				
-				if (exts.get(i).isStandard() && nombreCarteData[i][j] != 0)
+				if (nombreCarteData[i][j] != 0)
 					proba = ((double)nbcInteressanteData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[2][j];
 				
 				pbInteressanteData[i][j] = proba;
@@ -776,35 +767,28 @@ public class StatsBoosterModel {
 		
 		
 		for (int i = 0; i < exts.size(); i++) {
-			if (exts.get(i).isStandard()) {
-				double[][] tabMoy = new double[4][Rarete.values().length - 1];
-				
-				
-				for (int j = 0; j < Rarete.values().length - 1; j++) {
-					if (nombreCarteData[i][j] != 0) {
-						tabMoy[0][j] = (((double)nbcNormaleData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[0][j]) 
-										* (double)coutPoussiereData[0][j];
-						tabMoy[1][j] = (((double)nbcDoreeData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[1][j]) 
-										* (double)coutPoussiereData[1][j];
-						tabMoy[2][j] = ((1.0 - (double)nbcNormaleData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[0][j]) 
-										* (double)coutPoussiereData[2][j];
-						tabMoy[3][j] = ((1.0 - (double)nbcDoreeData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[1][j]) 
-										* (double)coutPoussiereData[3][j];
-					}
-					else {
-						tabMoy[0][j] = 0.0;
-						tabMoy[1][j] = 0.0;
-						tabMoy[2][j] = 0.0;
-						tabMoy[3][j] = 0.0;
-					}
+			double[][] tabMoy = new double[4][Rarete.values().length - 1];
+			
+			for (int j = 0; j < Rarete.values().length - 1; j++) {
+				if (nombreCarteData[i][j] != 0) {
+					tabMoy[0][j] = (((double)nbcNormaleData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[0][j]) 
+									* (double)coutPoussiereData[0][j];
+					tabMoy[1][j] = (((double)nbcDoreeData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[1][j]) 
+									* (double)coutPoussiereData[1][j];
+					tabMoy[2][j] = ((1.0 - (double)nbcNormaleData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[0][j]) 
+									* (double)coutPoussiereData[2][j];
+					tabMoy[3][j] = ((1.0 - (double)nbcDoreeData[i][j]/(double)nombreCarteData[i][j]) * (double)probaRareteData[1][j]) 
+									* (double)coutPoussiereData[3][j];
 				}
-				
-				
-				moyPoussiereData[i] = sommeTableau(tabMoy) * 5.0;
+				else {
+					tabMoy[0][j] = 0.0;
+					tabMoy[1][j] = 0.0;
+					tabMoy[2][j] = 0.0;
+					tabMoy[3][j] = 0.0;
+				}
 			}
-			else {
-				moyPoussiereData[i] = 0.0;
-			}
+			
+			moyPoussiereData[i] = sommeTableau(tabMoy) * 5.0;
 		}
 	}
 	

@@ -104,6 +104,15 @@ public class Carte implements Comparable<Carte>, Serializable {
 		return false;
 	}
 	
+	public boolean hasMaxCarte() {
+		if ((exemplaires.nbCarteNormale + exemplaires.nbCarteDoree) >= 2 || 
+				(rarete == Rarete.Legendaire && (exemplaires.nbCarteNormale + exemplaires.nbCarteDoree) >= 1)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public void ajouterCarteNormale() {
 		if (!hasMaxCarteNormale())
 			exemplaires.nbCarteNormale++;

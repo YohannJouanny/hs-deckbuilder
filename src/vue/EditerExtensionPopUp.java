@@ -136,7 +136,7 @@ public class EditerExtensionPopUp extends JDialog {
 		panInfos.add(panInfoExt);
 		
 		JPanel panInfoAventure = new JPanel();
-		JLabel aventureLb = new JLabel("Aventure : ");
+		JLabel aventureLb = new JLabel("Non collectable : ");
 		panInfoAventure.add(aventureLb);
 		aventureCB = new JCheckBox();
 		if (((Extension)extensionCB.getSelectedItem()).isAventure())

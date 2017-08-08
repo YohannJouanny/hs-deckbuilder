@@ -134,7 +134,7 @@ public class CreerExtensionPopUp extends JDialog {
 		panInfos.add(panInfoNom);
 		
 		JPanel panInfoAventure = new JPanel();
-		JLabel aventureLb = new JLabel("Aventure : ");
+		JLabel aventureLb = new JLabel("Non collectable : ");
 		panInfoAventure.add(aventureLb);
 		aventureCB = new JCheckBox();
 		panInfoAventure.add(aventureCB);
