@@ -61,6 +61,7 @@ public class ListeCartesPanel extends MainFramePanel {
 		
 		selectClasse.setSelectedItem(Classe.All);
 		manaRBGroup.getElements().nextElement().setSelected(true);
+		selectRarete.setSelectedItem(Rarete.All);
 		selectExt.setSelectedItem(Extension.ALL);
 	}
 	

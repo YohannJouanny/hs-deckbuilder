@@ -322,13 +322,20 @@ public class StatsBoosterModel {
 		
 		
 		for (int i = 0; i < exts.size(); i++) {
+			Extension ext = exts.get(i);
 			double total = 0.0;
 			
 			for (int j = 0; j < Rarete.values().length - 1; j++) {
 				double proba = 0.0;
 				
-				if (nombreCarteData[i][j] != 0)
-					proba = ((double)nbcNormaleData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[0][j];
+				if (nombreCarteData[i][j] != 0) {
+					if (Rarete.values()[j] == Rarete.Legendaire && !model.getListeCartes().hasAllLegendaire(ext)) {
+						proba = probaRareteData[0][j];
+					}
+					else {
+						proba = ((double)nbcNormaleData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[0][j];
+					}
+				}
 				
 				pbNormaleData[i][j] = proba;
 				total += proba;
@@ -453,13 +460,20 @@ public class StatsBoosterModel {
 		
 		
 		for (int i = 0; i < exts.size(); i++) {
+			Extension ext = exts.get(i);
 			double total = 0.0;
 			
 			for (int j = 0; j < Rarete.values().length - 1; j++) {
 				double proba = 0.0;
 				
-				if (nombreCarteData[i][j] != 0)
-					proba = ((double)nbcDoreeData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[1][j];
+				if (nombreCarteData[i][j] != 0) {
+					if (Rarete.values()[j] == Rarete.Legendaire && !model.getListeCartes().hasAllLegendaire(ext)) {
+						proba = probaRareteData[1][j];
+					}
+					else {
+						proba = ((double)nbcDoreeData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[1][j];
+					}
+				}
 				
 				pbDoreeData[i][j] = proba;
 				total += proba;
@@ -585,13 +599,21 @@ public class StatsBoosterModel {
 		
 		
 		for (int i = 0; i < exts.size(); i++) {
+			Extension ext = exts.get(i);
 			double total = 0.0;
 			
 			for (int j = 0; j < Rarete.values().length - 1; j++) {
 				double proba = 0.0;
 				
-				if (nombreCarteData[i][j] != 0)
-					proba = ((double)nbcInteressanteData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[2][j];
+				if (nombreCarteData[i][j] != 0) {
+					if (Rarete.values()[j] == Rarete.Legendaire && !model.getListeCartes().hasAllLegendaire(ext)) {
+						double nbCarteNonPossedees = model.getListeCartes().getNombreCarteNonPossedees(ext, Rarete.Legendaire);
+						proba = ((double)nbcInteressanteData[i][j]/nbCarteNonPossedees)*probaRareteData[2][j];
+					}
+					else {
+						proba = ((double)nbcInteressanteData[i][j]/(double)nombreCarteData[i][j])*probaRareteData[2][j];
+					}
+				}
 				
 				pbInteressanteData[i][j] = proba;
 				total += proba;
