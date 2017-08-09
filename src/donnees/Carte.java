@@ -9,6 +9,7 @@ public class Carte implements Comparable<Carte>, Serializable {
 
 	public enum Type {
 		Arme,
+		Hero,
 		Sort,
 		Serviteur;
 	}
