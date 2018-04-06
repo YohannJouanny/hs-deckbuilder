@@ -97,10 +97,7 @@ public class StatsBoosterPanel extends MainFramePanel {
 		
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		tableauStats.setDefaultRenderer(String.class, centerRenderer);
-		
-		StatsBoosterStringTableCell stringRenderer = new StatsBoosterStringTableCell();
-		tableauStats.setDefaultRenderer(String.class, stringRenderer);
+		tableauStats.setDefaultRenderer(String.class, new StatsBoosterStringTableCell());
 		
 		this.add(new JScrollPane(tableauStats), BorderLayout.CENTER);
 	}

@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -221,11 +222,22 @@ public class PityTimerPanel extends MainFramePanel {
 		JTable tableTimerArchives = new JTable(model.getPityTimerArchivesTableModel());
 		tableTimerArchives.setCellSelectionEnabled(false);
 		tableTimerArchives.setRowHeight(30);
-		
-		tableTimerArchives.setDefaultRenderer(String.class, centerRenderer);
+		tableTimerArchives.setDefaultRenderer(String.class, new DefaultTableCellRenderer() {
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				super.getTableCellRendererComponent(tableTimerArchives, value, isSelected, hasFocus, row, column);
+				this.setHorizontalAlignment(JLabel.CENTER);
+				
+				if (row == 0)  {
+					this.setFont(new Font("Arial", Font.BOLD, 14));
+				}
+				return this;
+			}
+		});
 		
 		tableauTimerArchives = new JScrollPane(tableTimerArchives);
-		
 	}
 	
 	

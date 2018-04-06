@@ -1,5 +1,7 @@
 package model;
 
+import java.text.NumberFormat;
+
 import javax.swing.table.AbstractTableModel;
 
 
@@ -9,10 +11,12 @@ public class PityTimerArchivesTableModel  extends AbstractTableModel{
 	
 	
 	private int[][] timerArchives;
+	private double[] timerMoyenne;
 	
 	
 	public PityTimerArchivesTableModel(int[][] timerArchives) {
 		this.timerArchives = timerArchives;
+		computeTimerMoyenne();
 	}
 	
 	
@@ -29,7 +33,7 @@ public class PityTimerArchivesTableModel  extends AbstractTableModel{
 				maxRows = data.length;
 		}
 		
-		return maxRows;
+		return maxRows + 1;
 	}
 	
 	public String getColumnName(int col) {
@@ -42,8 +46,14 @@ public class PityTimerArchivesTableModel  extends AbstractTableModel{
 	
 	
 	public Object getValueAt(int row, int col) {
-		if (row >= timerArchives[col].length)
+		if (row == 0) {
+			return doubleToString(timerMoyenne[col]);
+		}
+		
+		row--;
+		if (row >= timerArchives[col].length) {
 			return "";
+		}
 		
 		return timerArchives[col][row];
 	}
@@ -61,8 +71,34 @@ public class PityTimerArchivesTableModel  extends AbstractTableModel{
 	
 	public void updateData(int[][] timerArchives) {
 		this.timerArchives = timerArchives;
+		computeTimerMoyenne();
 		fireTableDataChanged();
 	}
 	
 	
+	private void computeTimerMoyenne()  {
+		timerMoyenne = new double[timerArchives.length];
+		
+		for (int i = 0; i < timerArchives.length; i++)  {
+			if (timerArchives[i].length == 0) {
+				timerMoyenne[i] = 0.0;
+				continue;
+			}
+			
+			int somme = 0;
+			for (int j = 0; j < timerArchives[i].length; j++)  {
+				somme += timerArchives[i][j];
+			}
+			
+			timerMoyenne[i] = (double)somme / (double)timerArchives[i].length;
+		}
+	}
+	
+	private String doubleToString(double value) {
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumFractionDigits(0);
+		nf.setMaximumFractionDigits(2);
+		
+		return nf.format(value);
+	}
 }
