@@ -57,9 +57,9 @@ public class PityTimerTableModel extends AbstractTableModel{
 			case ValMax:
 				return String.class;
 			case ValActuelle:
-				return String.class;
-			case Action:
 				return int.class;
+			case Action:
+				return boolean.class;
 			default:
 				return null;
 		}

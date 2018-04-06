@@ -192,22 +192,22 @@ public class StatsBoosterModel {
 	private void computeProbaRareteData() {
 		probaRareteData = new double[3][Rarete.values().length];
 		
-		probaRareteData[0][0] = 0.7036;
-		probaRareteData[0][1] = 0.2160;
-		probaRareteData[0][2] = 0.0409;
-		probaRareteData[0][3] = 0.0094;
-		probaRareteData[0][4] = 0.9699;
+		probaRareteData[0][0] = 0.7014;
+		probaRareteData[0][1] = 0.2151;
+		probaRareteData[0][2] = 0.0419;
+		probaRareteData[0][3] = 0.0100;
+		probaRareteData[0][4] = 0.9684;
 		
-		probaRareteData[1][0] = 0.0148;
-		probaRareteData[1][1] = 0.0127;
-		probaRareteData[1][2] = 0.0019;
-		probaRareteData[1][3] = 0.0007;
-		probaRareteData[1][4] = 0.0301;
+		probaRareteData[1][0] = 0.0149;
+		probaRareteData[1][1] = 0.0133;
+		probaRareteData[1][2] = 0.0025;
+		probaRareteData[1][3] = 0.0009;
+		probaRareteData[1][4] = 0.0316;
 		
-		probaRareteData[2][0] = 0.7184;
-		probaRareteData[2][1] = 0.2287;
-		probaRareteData[2][2] = 0.0428;
-		probaRareteData[2][3] = 0.0101;
+		probaRareteData[2][0] = 0.7163;
+		probaRareteData[2][1] = 0.2284;
+		probaRareteData[2][2] = 0.0444;
+		probaRareteData[2][3] = 0.0109;
 		probaRareteData[2][4] = 1.0000;
 	}
 	

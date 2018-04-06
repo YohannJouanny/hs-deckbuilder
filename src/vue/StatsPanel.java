@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import model.StatsModel;
 import donnees.Extension;
+import model.StatsModel;
 
 
 public class StatsPanel extends MainFramePanel {

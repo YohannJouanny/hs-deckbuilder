@@ -11,8 +11,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-import model.ListeCartesModel;
 import donnees.Carte;
+import model.ListeCartesModel;
 
 
 public class SupprimerCarteTableCell extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {

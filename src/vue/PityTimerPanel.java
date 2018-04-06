@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -208,11 +209,27 @@ public class PityTimerPanel extends MainFramePanel {
 		
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-		tableTimerCourants.setDefaultRenderer(String.class, centerRenderer);
+		tableTimerCourants.setDefaultRenderer(String.class,  centerRenderer);
+		tableTimerCourants.setDefaultRenderer(int.class,  new DefaultTableCellRenderer() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				this.setHorizontalAlignment(JLabel.CENTER);
+				this.setBackground(Color.white);
+				
+				int val = (int) value;
+				if (val >= PityTimerModel.timerMax[row]) {
+					this.setBackground(new Color(255, 100, 100));
+				}
+				return this;
+			}
+		});
 		
 		ArchiverTimerTableCell tableCellArchiver = new ArchiverTimerTableCell(model);
-		tableTimerCourants.setDefaultRenderer(int.class, tableCellArchiver);
-		tableTimerCourants.setDefaultEditor(int.class, tableCellArchiver);
+		tableTimerCourants.setDefaultRenderer(boolean.class, tableCellArchiver);
+		tableTimerCourants.setDefaultEditor(boolean.class, tableCellArchiver);
 		
 		tableauTimerCourants = new JScrollPane(tableTimerCourants);
 		this.add(tableauTimerCourants, BorderLayout.CENTER);
@@ -227,11 +244,17 @@ public class PityTimerPanel extends MainFramePanel {
 			
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-				super.getTableCellRendererComponent(tableTimerArchives, value, isSelected, hasFocus, row, column);
+				super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 				this.setHorizontalAlignment(JLabel.CENTER);
+				this.setBackground(Color.white);
 				
 				if (row == 0)  {
 					this.setFont(new Font("Arial", Font.BOLD, 14));
+				} else if (value instanceof Integer) {
+					int val = (int) value;
+					if (val > PityTimerModel.timerMax[column]) {
+						this.setBackground(new Color(255, 100, 100));
+					}
 				}
 				return this;
 			}
