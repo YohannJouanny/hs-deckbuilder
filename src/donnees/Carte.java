@@ -9,6 +9,7 @@ public class Carte implements Comparable<Carte>, Serializable {
 
 	public enum Type {
 		Arme,
+		Hero,
 		Sort,
 		Serviteur;
 	}
@@ -100,6 +101,15 @@ public class Carte implements Comparable<Carte>, Serializable {
 	public boolean hasMaxCarteDoree() {
 		if (exemplaires.nbCarteDoree >= 2 || (rarete == Rarete.Legendaire && exemplaires.nbCarteDoree >= 1))
 			return true;
+		
+		return false;
+	}
+	
+	public boolean hasMaxCarte() {
+		if ((exemplaires.nbCarteNormale + exemplaires.nbCarteDoree) >= 2 || 
+				(rarete == Rarete.Legendaire && (exemplaires.nbCarteNormale + exemplaires.nbCarteDoree) >= 1)) {
+			return true;
+		}
 		
 		return false;
 	}

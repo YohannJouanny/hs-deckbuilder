@@ -73,7 +73,30 @@ public class ListeCartes implements Iterable<Carte>, Serializable {
 		return res;
 	}
 	
+	public boolean hasAllLegendaire(Extension ext) {
+		ListeCartes list = this.getListeFiltree(ext, Classe.All, Rarete.Legendaire);
+		
+		for (Carte c : list) {
+			if (!c.hasMaxCarte()) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 	
+	public int getNombreCarteNonPossedees(Extension ext, Rarete rarete) {
+		ListeCartes list = this.getListeFiltree(ext, Classe.All, rarete);
+		int res = 0;
+		
+		for (Carte c : list) {
+			if (!c.hasMaxCarte()) {
+				res++;
+			}
+		}
+		
+		return res;
+	}
 }
 
 
