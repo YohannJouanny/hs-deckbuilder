@@ -117,11 +117,17 @@ public class Carte implements Comparable<Carte>, Serializable {
 	public void ajouterCarteNormale() {
 		if (!hasMaxCarteNormale())
 			exemplaires.nbCarteNormale++;
+		
+		if (hasMaxCarte())
+			isInteressante = false;
 	}
 	
 	public void ajouterCarteDoree() {
 		if (!hasMaxCarteDoree())
 			exemplaires.nbCarteDoree++;
+		
+		if (hasMaxCarte())
+			isInteressante = false;
 	}
 	
 	public void enleverCarteNormale() {

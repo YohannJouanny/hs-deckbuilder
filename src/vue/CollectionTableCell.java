@@ -61,6 +61,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 				}
 				
 				fireEditingStopped();
+				table.repaint();
 			}
 		});
 		
@@ -87,6 +88,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 					}
 					
 					fireEditingStopped();
+					table.repaint();
 				}
 			});
 			
@@ -116,6 +118,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 				}
 				
 				fireEditingStopped();
+				table.repaint();
 			}
 		});
 		
@@ -142,6 +145,7 @@ public class CollectionTableCell extends AbstractCellEditor implements TableCell
 					}
 					
 					fireEditingStopped();
+					table.repaint();
 				}
 			});
 			
