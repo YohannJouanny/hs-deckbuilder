@@ -41,13 +41,13 @@ public class PityTimerModel {
 	private PityTimerArchivesTableModel pityTimerArchivesTM;
 	
 	private Extension extension;
+	private int[] boosterOuverts;
 	private int[][] timerCourants;
 	private int[][][] timerArchives;
 	
 	
 	public PityTimerModel() {
 		this.extension = Extension.values().get(0);
-		//loadManualy();
 		loadPityTimerData();
 		
 		pityTimerTM = new PityTimerTableModel(timerCourants[Extension.values().indexOf(extension)]);
@@ -55,6 +55,10 @@ public class PityTimerModel {
 	}
 	
 	
+	public int getBoosterOuverts() {
+		int indexExt = Extension.values().indexOf(extension);
+		return boosterOuverts[indexExt];
+	}
 	
 	public PityTimerTableModel getPityTimerTableModel() {
 		return pityTimerTM;
@@ -74,6 +78,7 @@ public class PityTimerModel {
 	
 	public void incrementeTimer() {
 		int indexExt = Extension.values().indexOf(extension);
+		boosterOuverts[indexExt]++;
 		
 		for (int i = 0; i < timerCourants[indexExt].length; i++) {
 			timerCourants[indexExt][i]++;
@@ -84,6 +89,9 @@ public class PityTimerModel {
 	
 	public void decrementeTimer() {
 		int indexExt = Extension.values().indexOf(extension);
+		
+		if (boosterOuverts[indexExt] > 0)
+			boosterOuverts[indexExt]--;
 		
 		for (int i = 0; i < timerCourants[indexExt].length; i++) {
 			if (timerCourants[indexExt][i] > 0)
@@ -161,15 +169,18 @@ public class PityTimerModel {
 	
 	
 	public void notifyAjoutExtension() {
+		int[] tempBO = boosterOuverts;
 		int[][] tempTC = timerCourants;
 		int[][][] tempTA = timerArchives;
 		
+		boosterOuverts = new int[Extension.values().size()];
 		timerCourants = new int[Extension.values().size()][rarete.length];
 		timerArchives = new int[Extension.values().size()][rarete.length][];
 		initArchives();
 		
 		
 		for (int i = 0; i < Extension.values().size() - 1; i++) {
+			boosterOuverts[i] = tempBO[i];
 			timerCourants[i] = tempTC[i];
 			timerArchives[i] = tempTA[i];
 		}
@@ -179,9 +190,11 @@ public class PityTimerModel {
 	
 	
 	public void notifySuppressionExtension(int indexExt) {
+		int[] tempBO = boosterOuverts;
 		int[][] tempTC = timerCourants;
 		int[][][] tempTA = timerArchives;
 		
+		boosterOuverts = new int[Extension.values().size()];
 		timerCourants = new int[Extension.values().size()][rarete.length];
 		timerArchives = new int[Extension.values().size()][rarete.length][];
 		initArchives();
@@ -191,6 +204,7 @@ public class PityTimerModel {
 		
 		for (int i = 0; i < Extension.values().size() + 1; i++) {
 			if (i != indexExt) {
+				boosterOuverts[i] = tempBO[i];
 				timerCourants[j] = tempTC[i];
 				timerArchives[j] = tempTA[i];
 				j++;
@@ -206,6 +220,7 @@ public class PityTimerModel {
 	
 	
 	private void loadPityTimerData() {
+		boosterOuverts = new int[Extension.values().size()];
 		timerCourants = new int[Extension.values().size()][rarete.length];
 		timerArchives = new int[Extension.values().size()][rarete.length][];
 		initArchives();
@@ -213,9 +228,13 @@ public class PityTimerModel {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("pitytimer.data"))));
 			
+			int[] tempBO = (int[])ois.readObject();
 			int[][] tempTC = (int[][])ois.readObject();
 			int[][][] tempTA = (int[][][])ois.readObject();
 			
+			
+			if (tempBO.length == Extension.values().size())
+				boosterOuverts = tempBO;
 			
 			if (tempTC.length == Extension.values().size())
 				timerCourants = tempTC;
@@ -235,6 +254,7 @@ public class PityTimerModel {
 	public void savePityTimerData() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("pitytimer.data"))));
+			oos.writeObject(boosterOuverts);
 			oos.writeObject(timerCourants);
 			oos.writeObject(timerArchives);
 			oos.close();
@@ -255,248 +275,17 @@ public class PityTimerModel {
 	
 	
 	
-	
-	
-	
-	
 	@SuppressWarnings("unused")
-	private void loadManualy() {
-		timerCourants = new int[Extension.values().size()][rarete.length];
-		timerArchives = new int[Extension.values().size()][rarete.length][];
-		initArchives();
-		
-		
-		
-		//Classique
-		timerCourants[1][0] = 0;
-		timerCourants[1][1] = 13;
-		timerCourants[1][2] = 18;
-		timerCourants[1][3] = 3;
-		timerCourants[1][4] = 60;
-		timerCourants[1][5] = 15;
-		
-		
-		timerArchives[1][0] = new int[16];
-		timerArchives[1][0][0] = 7;
-		timerArchives[1][0][1] = 7;
-		timerArchives[1][0][2] = 6;
-		timerArchives[1][0][3] = 4;
-		timerArchives[1][0][4] = 2;
-		timerArchives[1][0][5] = 7;
-		timerArchives[1][0][6] = 2;
-		timerArchives[1][0][7] = 2;
-		timerArchives[1][0][8] = 8;
-		timerArchives[1][0][9] = 3;
-		timerArchives[1][0][10] = 3;
-		timerArchives[1][0][11] = 6;
-		timerArchives[1][0][12] = 0;
-		timerArchives[1][0][13] = 10;
-		timerArchives[1][0][14] = 8;
-		timerArchives[1][0][15] = 9;
-		timerArchives[1][1] = new int[6];
-		timerArchives[1][1][0] = 5;
-		timerArchives[1][1][1] = 6;
-		timerArchives[1][1][2] = 23;
-		timerArchives[1][1][3] = 11;
-		timerArchives[1][1][4] = 15;
-		timerArchives[1][1][5] = 5;
-		timerArchives[1][2] = new int[5];
-		timerArchives[1][2][0] = 8;
-		timerArchives[1][2][1] = 6;
-		timerArchives[1][2][2] = 18;
-		timerArchives[1][2][3] = 21;
-		timerArchives[1][2][4] = 17;
-		timerArchives[1][3] = new int[4];
-		timerArchives[1][3][0] = 12;
-		timerArchives[1][3][1] = 26;
-		timerArchives[1][3][2] = 7;
-		timerArchives[1][3][3] = 19;
-		timerArchives[1][4] = new int[0];
-		timerArchives[1][5] = new int[0];
-		
-		
-		
-		//GVG
-		timerCourants[3][0] = 1;
-		timerCourants[3][1] = 13;
-		timerCourants[3][2] = 4;
-		timerCourants[3][3] = 8;
-		timerCourants[3][4] = 39;
-		timerCourants[3][5] = 7;
-		
-		
-		timerArchives[3][0] = new int[5];
-		timerArchives[3][0][0] = 8;
-		timerArchives[3][0][1] = 8;
-		timerArchives[3][0][2] = 9;
-		timerArchives[3][0][3] = 3;
-		timerArchives[3][0][4] = 6;
-		timerArchives[3][1] = new int[0];
-		timerArchives[3][2] = new int[2];
-		timerArchives[3][2][0] = 17;
-		timerArchives[3][2][1] = 11;
-		timerArchives[3][3] = new int[1];
-		timerArchives[3][3][0] = 22;
-		timerArchives[3][4] = new int[0];
-		timerArchives[3][5] = new int[0];
-		
-		
-		
-		//TGT
-		timerCourants[5][0] = 8;
-		timerCourants[5][1] = 0;
-		timerCourants[5][2] = 10;
-		timerCourants[5][3] = 3;
-		timerCourants[5][4] = 37;
-		timerCourants[5][5] = 64;
-		
-		
-		timerArchives[5][0] = new int[9];
-		timerArchives[5][0][0] = 9;
-		timerArchives[5][0][1] = 9;
-		timerArchives[5][0][2] = 1;
-		timerArchives[5][0][3] = 9;
-		timerArchives[5][0][4] = 3;
-		timerArchives[5][0][5] = 4;
-		timerArchives[5][0][6] = 4;
-		timerArchives[5][0][7] = 1;
-		timerArchives[5][0][8] = 8;
-		timerArchives[5][1] = new int[3];
-		timerArchives[5][1][0] = 10;
-		timerArchives[5][1][1] = 21;
-		timerArchives[5][1][2] = 17;
-		timerArchives[5][2] = new int[4];
-		timerArchives[5][2][0] = 9;
-		timerArchives[5][2][1] = 14;
-		timerArchives[5][2][2] = 10;
-		timerArchives[5][2][3] = 20;
-		timerArchives[5][3] = new int[6];
-		timerArchives[5][3][0] = 6;
-		timerArchives[5][3][1] = 3;
-		timerArchives[5][3][2] = 11;
-		timerArchives[5][3][3] = 23;
-		timerArchives[5][3][4] = 5;
-		timerArchives[5][3][5] = 9;
-		timerArchives[5][4] = new int[0];
-		timerArchives[5][5] = new int[0];
-
-		
-		
-		//OG
-		timerCourants[7][0] = 1;
-		timerCourants[7][1] = 1;
-		timerCourants[7][2] = 12;
-		timerCourants[7][3] = 20;
-		timerCourants[7][4] = 80;
-		timerCourants[7][5] = 113;
-		
-		
-		timerArchives[7][0] = new int[22];
-		timerArchives[7][0][0] = 6;
-		timerArchives[7][0][1] = 6;
-		timerArchives[7][0][2] = 8;
-		timerArchives[7][0][3] = 5;
-		timerArchives[7][0][4] = 9;
-		timerArchives[7][0][5] = 8;
-		timerArchives[7][0][6] = 1;
-		timerArchives[7][0][7] = 5;
-		timerArchives[7][0][8] = 6;
-		timerArchives[7][0][9] = 0;
-		timerArchives[7][0][10] = 8;
-		timerArchives[7][0][11] = 4;
-		timerArchives[7][0][12] = 8;
-		timerArchives[7][0][13] = 3;
-		timerArchives[7][0][14] = 3;
-		timerArchives[7][0][15] = 3;
-		timerArchives[7][0][16] = 7;
-		timerArchives[7][0][17] = 8;
-		timerArchives[7][0][18] = 7;
-		timerArchives[7][0][19] = 1;
-		timerArchives[7][0][20] = 0;
-		timerArchives[7][0][21] = 6;
-		timerArchives[7][1] = new int[5];
-		timerArchives[7][1][0] = 18;
-		timerArchives[7][1][1] = 13;
-		timerArchives[7][1][2] = 22;
-		timerArchives[7][1][3] = 33;
-		timerArchives[7][1][4] = 26;
-		timerArchives[7][2] = new int[9];
-		timerArchives[7][2][0] = 8;
-		timerArchives[7][2][1] = 7;
-		timerArchives[7][2][2] = 14;
-		timerArchives[7][2][3] = 17;
-		timerArchives[7][2][4] = 13;
-		timerArchives[7][2][5] = 7;
-		timerArchives[7][2][6] = 7;
-		timerArchives[7][2][7] = 5;
-		timerArchives[7][2][8] = 23;
-		timerArchives[7][3] = new int[6];
-		timerArchives[7][3][0] = 22;
-		timerArchives[7][3][1] = 16;
-		timerArchives[7][3][2] = 18;
-		timerArchives[7][3][3] = 7;
-		timerArchives[7][3][4] = 15;
-		timerArchives[7][3][5] = 15;
-		timerArchives[7][4] = new int[1];
-		timerArchives[7][4][0] = 33;
-		timerArchives[7][5] = new int[0];
-		
-		
-		
-		//Gadgetzan
-		timerCourants[9][0] = 4;
-		timerCourants[9][1] = 16;
-		timerCourants[9][2] = 13;
-		timerCourants[9][3] = 13;
-		timerCourants[9][4] = 3;
-		timerCourants[9][5] = 110;
-		
-		
-		timerArchives[9][0] = new int[17];
-		timerArchives[9][0][0] = 7;
-		timerArchives[9][0][1] = 8;
-		timerArchives[9][0][2] = 7;
-		timerArchives[9][0][3] = 7;
-		timerArchives[9][0][4] = 8;
-		timerArchives[9][0][5] = 8;
-		timerArchives[9][0][6] = 9;
-		timerArchives[9][0][7] = 7;
-		timerArchives[9][0][8] = 1;
-		timerArchives[9][0][9] = 0;
-		timerArchives[9][0][10] = 4;
-		timerArchives[9][0][11] = 2;
-		timerArchives[9][0][12] = 5;
-		timerArchives[9][0][13] = 9;
-		timerArchives[9][0][14] = 9;
-		timerArchives[9][0][15] = 6;
-		timerArchives[9][0][16] = 9;
-		timerArchives[9][1] = new int[7];
-		timerArchives[9][1][0] = 1;
-		timerArchives[9][1][1] = 9;
-		timerArchives[9][1][2] = 12;
-		timerArchives[9][1][3] = 36;
-		timerArchives[9][1][4] = 1;
-		timerArchives[9][1][5] = 30;
-		timerArchives[9][1][6] = 5;
-		timerArchives[9][2] = new int[7];
-		timerArchives[9][2][0] = 22;
-		timerArchives[9][2][1] = 18;
-		timerArchives[9][2][2] = 15;
-		timerArchives[9][2][3] = 3;
-		timerArchives[9][2][4] = 14;
-		timerArchives[9][2][5] = 22;
-		timerArchives[9][2][6] = 3;
-		timerArchives[9][3] = new int[6];
-		timerArchives[9][3][0] = 19;
-		timerArchives[9][3][1] = 6;
-		timerArchives[9][3][2] = 9;
-		timerArchives[9][3][3] = 19;
-		timerArchives[9][3][4] = 27;
-		timerArchives[9][3][5] = 17;
-		timerArchives[9][4] = new int[2];
-		timerArchives[9][4][0] = 61;
-		timerArchives[9][4][1] = 46;
-		timerArchives[9][5] = new int[0];
+	private void loadBoosterOuvertsManualy() {
+		boosterOuverts = new int[Extension.values().size()];
+		boosterOuverts[1] = 142;
+		boosterOuverts[4] = 39;
+		boosterOuverts[6] = 64;
+		boosterOuverts[8] = 117;
+		boosterOuverts[10] = 129;
+		boosterOuverts[11] = 168;
+		boosterOuverts[12] = 172;
+		boosterOuverts[13] = 205;
 	}
 	
 }

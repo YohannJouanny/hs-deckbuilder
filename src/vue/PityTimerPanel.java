@@ -31,6 +31,7 @@ public class PityTimerPanel extends MainFramePanel {
 	private JScrollPane tableauTimerCourants;
 	private JScrollPane tableauTimerArchives;
 	private JComboBox<Extension> selectExt;
+	private JLabel nbBooster;
 	private JButton incButton;
 	private JButton decButton;
 	private JButton resetButton;
@@ -94,22 +95,32 @@ public class PityTimerPanel extends MainFramePanel {
 		selectExt.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				model.changeExtension((Extension)selectExt.getSelectedItem());
+				updateNbBooster();
 			}
 		});
 		panCritExtCB.add(selectExt);
 		panCritExt.add(panCritExtCB);
 		
+		JLabel critEspace2 = new JLabel(" ");
+		panCritExt.add(critEspace2);
+		
+		JLabel nbBoosterLb = new JLabel("Booster ouverts :");
+		nbBoosterLb.setAlignmentX(CENTER_ALIGNMENT);
+		panCritExt.add(nbBoosterLb);
+		
+		nbBooster = new JLabel(Integer.toString(model.getBoosterOuverts()));
+		nbBooster.setAlignmentX(CENTER_ALIGNMENT);
+		nbBooster.setFont(new Font("Arial", Font.BOLD, 15));
+		panCritExt.add(nbBooster);
+		
 		panControl.add(panCritExt, BorderLayout.NORTH);
 		
 		
 		// Panel Est : Boutons Timer
-		JPanel panBoutonsTimer = new JPanel(new GridLayout(10, 1));
+		JPanel panBoutonsTimer = new JPanel(new GridLayout(8, 1));
 		
 		JPanel panVoidButton = new JPanel();
 		panBoutonsTimer.add(panVoidButton);
-		
-		JPanel panVoid2Button = new JPanel();
-		panBoutonsTimer.add(panVoid2Button);
 		
 		JPanel panIncButton = new JPanel();
 		incButton = new JButton("Timer +");
@@ -117,6 +128,7 @@ public class PityTimerPanel extends MainFramePanel {
 		incButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				model.incrementeTimer();
+				updateNbBooster();
 			}
 		});
 		panIncButton.add(incButton);
@@ -131,6 +143,7 @@ public class PityTimerPanel extends MainFramePanel {
 		decButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				model.decrementeTimer();
+				updateNbBooster();
 			}
 		});
 		panDecButton.add(decButton);
@@ -142,6 +155,7 @@ public class PityTimerPanel extends MainFramePanel {
 		resetButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				model.reloadData();
+				updateNbBooster();
 			}
 		});
 		panRestButton.add(resetButton);
@@ -264,7 +278,9 @@ public class PityTimerPanel extends MainFramePanel {
 	}
 	
 	
-	
+	private void updateNbBooster() {
+		nbBooster.setText(Integer.toString(model.getBoosterOuverts()));
+	}
 	
 	private void switchMode() {
 		if (archiveMode) {
