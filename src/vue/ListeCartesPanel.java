@@ -1,9 +1,12 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
@@ -16,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import donnees.Carte;
@@ -34,6 +38,7 @@ public class ListeCartesPanel extends MainFramePanel {
 	
 	private JTable tableauCartes;
 	private JComboBox<Classe> selectClasse;
+	private JTextField critereNom;
 	private JComboBox<Rarete> selectRarete;
 	private JComboBox<Extension> selectExt;
 	private ButtonGroup manaRBGroup;
@@ -191,6 +196,36 @@ public class ListeCartesPanel extends MainFramePanel {
 		JPanel panCritSud = new JPanel();
 		panCritSud.setLayout(new BoxLayout(panCritSud, BoxLayout.Y_AXIS));
 		
+		// Panel Critere : Critere nom
+		JPanel panCritNom = new JPanel();
+		panCritNom.setLayout(new BoxLayout(panCritNom, BoxLayout.Y_AXIS));
+		
+		JLabel critNomLb = new JLabel("Nom :");
+		critNomLb.setAlignmentX(CENTER_ALIGNMENT);
+		panCritNom.add(critNomLb);
+		
+		JPanel panCritNomTb = new JPanel();
+		critereNom = new JTextField(10);
+		critereNom.setBackground(new Color(250, 250, 250));
+		critereNom.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+				
+			@Override
+			public void keyReleased(KeyEvent e) {
+				actualiseListe();
+			}
+		});
+		panCritNomTb.add(critereNom);
+		panCritNom.add(panCritNomTb);
+		
+		panCritSud.add(panCritNom);
+		
+		
 		// Panel Critere : Critere rarete
 		JPanel panCritRarete = new JPanel();
 		panCritRarete.setLayout(new BoxLayout(panCritRarete, BoxLayout.Y_AXIS));
@@ -342,14 +377,19 @@ public class ListeCartesPanel extends MainFramePanel {
 	private ActionListener createActualiseListeActionListener() {
 		return new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				int cout = getSelectedManaButton().getValue();
-				Classe classe = (Classe)selectClasse.getSelectedItem();
-				Rarete rarete = (Rarete)selectRarete.getSelectedItem();
-				Extension ext = (Extension)selectExt.getSelectedItem();
-				
-				model.changeCriteres(cout, classe, rarete, ext);
+				actualiseListe();
 			}
 		};
+	}
+	
+	private void actualiseListe() {
+		int cout = getSelectedManaButton().getValue();
+		Classe classe = (Classe)selectClasse.getSelectedItem();
+		Rarete rarete = (Rarete)selectRarete.getSelectedItem();
+		Extension ext = (Extension)selectExt.getSelectedItem();
+		String nom = critereNom.getText();
+		
+		model.changeCriteres(cout, classe, rarete, ext, nom);
 	}
 	
 	

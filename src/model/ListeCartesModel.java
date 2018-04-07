@@ -15,6 +15,7 @@ public class ListeCartesModel {
 	private Classe critereClasse;
 	private Rarete critereRarete;
 	private Extension critereExtension;
+	private String critereNom;
 	
 	
 	public ListeCartesModel(Model model) {
@@ -23,6 +24,7 @@ public class ListeCartesModel {
 		critereClasse = Classe.All;
 		critereRarete = Rarete.All;
 		critereExtension = Extension.ALL;
+		critereNom = "";
 		
 		initListeCartesTableModel();
 	}
@@ -36,11 +38,12 @@ public class ListeCartesModel {
 		return listeCarteTM;
 	}
 	
-	public void changeCriteres(int coutMana, Classe classe, Rarete rarete, Extension ext) {
+	public void changeCriteres(int coutMana, Classe classe, Rarete rarete, Extension ext, String nom) {
 		critereMana = coutMana;
 		critereClasse = classe;
 		critereRarete = rarete;
 		critereExtension = ext;
+		critereNom = nom;
 		actualiseTable();
 	}
 	
@@ -85,7 +88,7 @@ public class ListeCartesModel {
 	private void actualiseTable() {
 		ListeCartes liste = new ListeCartes();
 		
-		for (Carte c : model.getListeCartes().getListeFiltree(critereExtension, critereClasse, critereRarete)) {
+		for (Carte c : model.getListeCartes().getListeFiltree(critereExtension, critereClasse, critereRarete, critereNom)) {
 			if (critereMana == -1 || c.getMana() == critereMana || (critereMana == 7 && c.getMana() >= critereMana)) {
 				liste.ajouterCarte(c);
 			}

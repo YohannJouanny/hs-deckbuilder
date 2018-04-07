@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -59,15 +61,35 @@ public class ListeCartes implements Iterable<Carte>, Serializable {
 	
 	
 	public ListeCartes getListeFiltree(Extension extension, Classe classe, Rarete rarete) {
+		return getListeFiltree(extension, classe, rarete, null);
+	}
+	
+	public ListeCartes getListeFiltree(Extension extension, Classe classe, Rarete rarete, String nom) {
 		ListeCartes res = new ListeCartes();
 		
 		for (Carte c : liste) {
-			if (extension.equals(Extension.ALL) || c.getExtension().equals(extension)) {
-				if (classe == Classe.All || c.getClasse() == classe) {
-					if (rarete == Rarete.All || c.getRarete() == rarete)
-						res.ajouterCarte(c);
+			if (!extension.equals(Extension.ALL) && !c.getExtension().equals(extension)) {
+				continue;
+			}
+			
+			if (classe != Classe.All && c.getClasse() != classe) {
+				continue;
+			}
+			
+			if (rarete != Rarete.All && c.getRarete() != rarete) {
+				continue;
+			}
+			
+			if (nom != null && !nom.trim().isEmpty()) {
+				String nomCarte = Normalizer.normalize(c.getNom().toUpperCase(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+				String nomCritere = Normalizer.normalize(nom.toUpperCase().trim(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+				
+				if (!nomCarte.contains(nomCritere)) {
+					continue;
 				}
 			}
+			
+			res.ajouterCarte(c);
 		}
 		
 		return res;
