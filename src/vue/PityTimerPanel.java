@@ -89,8 +89,11 @@ public class PityTimerPanel extends MainFramePanel {
 		JPanel panCritExtCB = new JPanel();
 		selectExt = new JComboBox<Extension>();
 		for (Extension ext : Extension.values()) {
-			if (!ext.isAventure())
-				selectExt.addItem(ext);
+			if (ext.isAventure() || (model.getParamHideWildExt() && !ext.isStandard())) {
+				continue;
+			}
+			
+			selectExt.addItem(ext);
 		}
 		selectExt.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {

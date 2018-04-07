@@ -28,6 +28,9 @@ public class ListeCartesModel {
 	}
 	
 	
+	public boolean getParamHideWildExt() {
+		return model.getConfig().isHideWildExtensions();
+	}
 	
 	public ListeCartesTableModel getListeCartesTableModel() {
 		return listeCarteTM;

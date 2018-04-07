@@ -10,10 +10,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import donnees.Carte;
+import donnees.Config;
 import donnees.Extension;
 
 
 public class Model {
+	private Config config;
 	private ListeCartes listeCartes;
 	private ListeCartesModel modelLC;
 	private StatsModel modelStats;
@@ -22,15 +24,23 @@ public class Model {
 	
 	
 	public Model() {
-		listeCartes = new ListeCartes();
 		loadModel();
 		
 		modelLC = new ListeCartesModel(this);
 		modelStats = new StatsModel(this);
 		modelSB = new StatsBoosterModel(this);
-		modelPT = new PityTimerModel();
+		modelPT = new PityTimerModel(this);
 	}
 	
+	
+
+	public Config getConfig() {
+		return config;
+	}
+	
+	public void changeConfig(Config config) {
+		this.config = config;
+	}
 	
 	
 	public ListeCartes getListeCartes() {
@@ -40,7 +50,6 @@ public class Model {
 	public void supprimerAllCartes() {
 		listeCartes = new ListeCartes();
 	}
-	
 	
 	
 	public ListeCartesModel getListeCartesModel() {
@@ -58,7 +67,6 @@ public class Model {
 	public PityTimerModel getPityTimerModel() {
 		return modelPT;
 	}
-	
 	
 	
 	public void creerExtension(String nom, boolean isAdv, boolean isStandard) {
@@ -94,17 +102,40 @@ public class Model {
 	
 	
 	public void loadModel() {
+		loadConfig();
 		loadExtensions();
 		loadListe();
 		refreshListeCarteExtPointer();
 	}
 	
 	public void saveModel() {
+		saveConfig();
 		saveExtensions();
 		saveListe();
 		modelPT.savePityTimerData();
 	}
 	
+	private void loadConfig() {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("config.data"))));
+			config = (Config)ois.readObject();
+			ois.close();
+		} catch (FileNotFoundException e) {
+			config = new Config();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void saveConfig() {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("config.data"))));
+			oos.writeObject(config);
+			oos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private void loadExtensions() {
 		
@@ -127,7 +158,7 @@ public class Model {
 			listeCartes = (ListeCartes)ois.readObject();
 			ois.close();
 		} catch (FileNotFoundException e) {
-			// Do nothing, not an error
+			listeCartes = new ListeCartes();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -51,6 +51,7 @@ public class MainFrame extends JFrame {
 		JMenuItem itemStats = new JMenuItem("Collection");
 		JMenuItem itemStatsBooster = new JMenuItem("Statistiques de booster");
 		JMenuItem itemPityTimer = new JMenuItem("Pity timer");
+		JMenuItem itemPreferences = new JMenuItem("Préférences");
 		JMenuItem itemQuitter = new JMenuItem("Quitter");
 		
 		
@@ -78,6 +79,17 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
+		itemPreferences.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				PreferencesPopup popup = new PreferencesPopup(null, model.getConfig());
+				
+				if(popup.showPopUp()) {
+					model.changeConfig(popup.getConfig());
+					vue.rebuildPanels();
+				}
+			}
+		});
+		
 		itemQuitter.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				vue.saveModel();
@@ -90,6 +102,8 @@ public class MainFrame extends JFrame {
 		menuFenetre.add(itemStats);
 		menuFenetre.add(itemStatsBooster);
 		menuFenetre.add(itemPityTimer);
+		menuFenetre.addSeparator();
+		menuFenetre.add(itemPreferences);
 		menuFenetre.addSeparator();
 		menuFenetre.add(itemQuitter);
 		menubar.add(menuFenetre);

@@ -225,6 +225,10 @@ public class ListeCartesPanel extends MainFramePanel {
 		selectExt = new JComboBox<Extension>();
 		selectExt.addItem(Extension.ALL);
 		for (Extension ext : Extension.values()) {
+			if (model.getParamHideWildExt() && !ext.isStandard()) {
+				continue;
+			}
+			
 			selectExt.addItem(ext);
 		}
 		selectExt.addActionListener(createActualiseListeActionListener());

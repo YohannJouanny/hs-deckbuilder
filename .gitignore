@@ -2,6 +2,7 @@ bin/
 .settings/
 .classpath
 .project
+config.data
 liste.data
 pitytimer.data
 extensions.data

@@ -36,7 +36,7 @@ public class PityTimerModel {
 	}
 	
 	
-	
+	private Model model;
 	private PityTimerTableModel pityTimerTM;
 	private PityTimerArchivesTableModel pityTimerArchivesTM;
 	
@@ -46,7 +46,8 @@ public class PityTimerModel {
 	private int[][][] timerArchives;
 	
 	
-	public PityTimerModel() {
+	public PityTimerModel(Model model) {
+		this.model = model;
 		this.extension = Extension.values().get(0);
 		loadPityTimerData();
 		
@@ -54,6 +55,10 @@ public class PityTimerModel {
 		pityTimerArchivesTM = new PityTimerArchivesTableModel(timerArchives[Extension.values().indexOf(extension)]);
 	}
 	
+	
+	public boolean getParamHideWildExt() {
+		return model.getConfig().isHideWildExtensions();
+	}
 	
 	public int getBoosterOuverts() {
 		int indexExt = Extension.values().indexOf(extension);

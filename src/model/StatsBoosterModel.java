@@ -850,8 +850,11 @@ public class StatsBoosterModel {
 		ArrayList<Extension> res = new ArrayList<Extension>();
 		
 		for (Extension ext : Extension.values()) {
-			if (!ext.isAventure())
-				res.add(ext);
+			if (ext.isAventure() || (model.getConfig().isHideWildExtensions() && !ext.isStandard())) {
+				continue;
+			}
+			
+			res.add(ext);
 		}
 		
 		return res;
