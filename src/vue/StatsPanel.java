@@ -1,6 +1,8 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,39 +69,39 @@ public class StatsPanel extends MainFramePanel {
 		
 		// PANEL EST : CRITERES DE SELECTION
 		JPanel panCritere = new JPanel();
-		panCritere.setLayout(new BoxLayout(panCritere, BoxLayout.Y_AXIS));
-		
-		
-		JLabel critEspace1 = new JLabel("     "); // Allignement par rapport à la bordure droite
-		critEspace1.setAlignmentX(LEFT_ALIGNMENT);
-		panCritere.add(critEspace1);
-		
-		JLabel critEspace2 = new JLabel(" ");
-		panCritere.add(critEspace2);
-		
-		
-		JPanel panCritExt = new JPanel();
-		panCritExt.setLayout(new BoxLayout(panCritExt, BoxLayout.Y_AXIS));
-		
-		JLabel extensionLb = new JLabel("Extensions :       "); // Allignement par rapport aux check box
-		extensionLb.setAlignmentX(RIGHT_ALIGNMENT);
-		panCritExt.add(extensionLb);
+		panCritere.setLayout(new BorderLayout());
 		
 		
 		// Extensions
+		JPanel panCritExt = new JPanel();
+		panCritExt.setLayout(new BoxLayout(panCritExt, BoxLayout.Y_AXIS));
+		
+		JPanel panCritExtLb = new JPanel();
+		panCritExtLb.setLayout(new BoxLayout(panCritExtLb, BoxLayout.Y_AXIS));
+		JLabel extensionLb = new JLabel("Extensions : ");
+		extensionLb.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panCritExtLb.add(extensionLb);
+		JLabel critExtVoid1 = new JLabel(" ");
+		panCritExtLb.add(critExtVoid1);
+		panCritExt.add(panCritExtLb);
+		
+		
+		JPanel panCritExtCb = new JPanel();
+		panCritExtCb.setLayout(new BoxLayout(panCritExtCb, BoxLayout.Y_AXIS));
+		
 		extAllChB = new JCheckBox(Extension.ALL.toString() + "  "); // Espace avec la check box
 		extAllChB.setHorizontalTextPosition(JCheckBox.LEFT);
-		extAllChB.setAlignmentX(RIGHT_ALIGNMENT);
-		panCritExt.add(extAllChB);
+		extAllChB.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panCritExtCb.add(extAllChB);
 		
 		listeExtChB = new ArrayList<JCheckBox>();
 		for (Extension ext : Extension.values()) {
 			JCheckBox extChB = new JCheckBox(ext.toString() + "  ");
 			extChB.setHorizontalTextPosition(JCheckBox.LEFT);
-			extChB.setAlignmentX(RIGHT_ALIGNMENT);
+			extChB.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			extChB.addActionListener(createActualiseTableauActionListener());
 			extChB.addActionListener(createDeselectAllExtActionListener());
-			panCritExt.add(extChB);
+			panCritExtCb.add(extChB);
 			listeExtChB.add(extChB);
 		}
 		
@@ -119,41 +121,46 @@ public class StatsPanel extends MainFramePanel {
 				model.changeCriteres(getCriteresExtension(), carteNChB.isSelected(), carteDChB.isSelected());
 			}
 		});
+				
+		JScrollPane panExtScroller = new JScrollPane(panCritExtCb);
+		panExtScroller.setPreferredSize(new Dimension(200, 330));
+		panExtScroller.setBorder(null);
+		panExtScroller.getVerticalScrollBar().setUnitIncrement(10);
+		panCritExt.add(panExtScroller);
 		
-		panCritere.add(panCritExt);
-		
-		
-		JLabel critEspace3 = new JLabel(" ");
-		panCritere.add(critEspace3);
-		
-		JLabel critEspace4 = new JLabel(" ");
-		panCritere.add(critEspace4);
-		
-		
+        panCritere.add(panCritExt, BorderLayout.NORTH);
+        
+        
+		// Type de carte
 		JPanel panCritCarte = new JPanel();
 		panCritCarte.setLayout(new BoxLayout(panCritCarte, BoxLayout.Y_AXIS));
 		
-		JLabel carteLb = new JLabel("Cartes :      "); // Allignement par rapport aux check box
-		carteLb.setAlignmentX(RIGHT_ALIGNMENT);
+		JLabel carteLb = new JLabel("Cartes :                   "); // Allignement au centre ne fonctionne pas
+		carteLb.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panCritCarte.add(carteLb);
+		
+		JLabel critCarteVoid1 = new JLabel("   "); // Ajout d'un offset à droite
+		critCarteVoid1.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panCritCarte.add(critCarteVoid1);
 		
 		carteNChB = new JCheckBox("Normales   ");
 		carteNChB.setHorizontalTextPosition(JCheckBox.LEFT);
-		carteNChB.setAlignmentX(RIGHT_ALIGNMENT);
+		carteNChB.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		carteNChB.addActionListener(createActualiseTableauActionListener());
 		panCritCarte.add(carteNChB);
 		
 		carteDChB = new JCheckBox("Dorées   ");
 		carteDChB.setHorizontalTextPosition(JCheckBox.LEFT);
-		carteDChB.setAlignmentX(RIGHT_ALIGNMENT);
+		carteDChB.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		carteDChB.addActionListener(createActualiseTableauActionListener());
 		panCritCarte.add(carteDChB);
 		
-		panCritere.add(panCritCarte);
+		JLabel critCarteVoid2 = new JLabel(" ");
+		panCritCarte.add(critCarteVoid2);
 		
+		panCritere.add(panCritCarte, BorderLayout.SOUTH);
 		
 		this.add(panCritere, BorderLayout.EAST);
-		
 		
 		
 		
