@@ -1,15 +1,19 @@
 package vue;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import app.Main;
 import model.Model;
 import vue.Vue.Ecran;
 
@@ -155,6 +159,11 @@ public class MainFrame extends JFrame {
 		menuExt.add(itemEditExt);
 		menuExt.add(itemDelExt);
 		menubar.add(menuExt);
+		
+		JLabel numVersionLb = new JLabel("Version " + Main.VERSION + "    ");
+		numVersionLb.setFont(new Font("Arial", Font.PLAIN, 12));
+		menubar.add(Box.createHorizontalGlue());
+		menubar.add(numVersionLb);
 		
 		this.setJMenuBar(menubar);
 	}
