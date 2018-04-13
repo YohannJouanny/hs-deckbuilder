@@ -1,6 +1,8 @@
 package donnees;
 
 import java.io.Serializable;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 
 
 public class Carte implements Comparable<Carte>, Serializable {
@@ -193,7 +195,9 @@ public class Carte implements Comparable<Carte>, Serializable {
 		if (mana - c.mana != 0)
 			return mana - c.mana;
 		
-		return nom.compareTo(c.nom);
+		String normalizedNomThis = Normalizer.normalize(nom.toUpperCase(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+		String normalizedNomC = Normalizer.normalize(c.nom.toUpperCase(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+		return normalizedNomThis.compareTo(normalizedNomC);
 	}
 }
 

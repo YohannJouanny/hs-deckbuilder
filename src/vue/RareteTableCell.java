@@ -30,9 +30,9 @@ public class RareteTableCell implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		Rarete rarete = (Rarete)value;
 		
-		int panelWidth = table.getColumnModel().getColumn(column).getPreferredWidth();
+		int panelWidth = table.getColumnModel().getColumn(column).getWidth();
 		int panelHeight = table.getRowHeight();
-		int panelHorizontalCenter = panelWidth/2 + 1; //Offset de règlage bidouille
+		int panelHorizontalCenter = panelWidth/2;
 		
 		
 		JPanel panel = new JPanel(null);
@@ -60,7 +60,7 @@ public class RareteTableCell implements TableCellRenderer {
 		}
 		
 		icone.setSize(25, 30);
-		icone.setLocation(panelHorizontalCenter - 10, 0);
+		icone.setLocation(panelHorizontalCenter - 12, 0);
 		panel.add(icone);
 		
 		return panel;

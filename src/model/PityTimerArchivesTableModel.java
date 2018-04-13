@@ -20,7 +20,6 @@ public class PityTimerArchivesTableModel  extends AbstractTableModel{
 	}
 	
 	
-	
 	public int getColumnCount() {
 		return timerArchives.length;
 	}
@@ -44,7 +43,6 @@ public class PityTimerArchivesTableModel  extends AbstractTableModel{
 		return String.class;
 	}
 	
-	
 	public Object getValueAt(int row, int col) {
 		if (row == 0) {
 			return doubleToString(timerMoyenne[col]);
@@ -62,19 +60,20 @@ public class PityTimerArchivesTableModel  extends AbstractTableModel{
 		
 	}
 	
-	
 	public boolean isCellEditable(int row, int col) {
 		return false;
 	}
 	
-	
+	@Override
+	public void fireTableDataChanged() {
+		computeTimerMoyenne();
+		super.fireTableDataChanged();
+	}
 	
 	public void updateData(int[][] timerArchives) {
 		this.timerArchives = timerArchives;
-		computeTimerMoyenne();
 		fireTableDataChanged();
 	}
-	
 	
 	private void computeTimerMoyenne()  {
 		timerMoyenne = new double[timerArchives.length];

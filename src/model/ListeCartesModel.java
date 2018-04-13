@@ -50,6 +50,7 @@ public class ListeCartesModel {
 	
 	public void creerCarte(String nom, int mana, Classe classe, Carte.Type type, Rarete rarete, Extension ext) {
 		model.getListeCartes().ajouterCarte(new Carte(nom, mana, classe, type, rarete, ext));
+		model.getListeCartes().sort();
 		actualiseTable();
 	}
 	
@@ -94,6 +95,7 @@ public class ListeCartesModel {
 			}
 		}
 		
+		liste.sort();
 		listeCarteTM.changeListe(liste);
 	}
 	

@@ -43,22 +43,21 @@ public class ListeCartes implements Iterable<Carte>, Serializable {
 		return liste.get(index);
 	}
 	
-	
 	public void ajouterCarte(Carte c) {
 		liste.add(c);
-		liste.sort(null);
 	}
 	
 	public void supprimerCarte(Carte c) {
 		liste.remove(c);
 	}
 
-
 	public Iterator<Carte> iterator() {
 		return liste.iterator();
 	}
 	
-	
+	public void sort() {
+		liste.sort(null);
+	}
 	
 	public ListeCartes getListeFiltree(Extension extension, Classe classe, Rarete rarete) {
 		return getListeFiltree(extension, classe, rarete, null);
@@ -66,6 +65,7 @@ public class ListeCartes implements Iterable<Carte>, Serializable {
 	
 	public ListeCartes getListeFiltree(Extension extension, Classe classe, Rarete rarete, String nom) {
 		ListeCartes res = new ListeCartes();
+		String nomCritere = (nom != null && !nom.trim().isEmpty()) ? Normalizer.normalize(nom.toUpperCase().trim(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "") : null;
 		
 		for (Carte c : liste) {
 			if (!extension.equals(Extension.ALL) && !c.getExtension().equals(extension)) {
@@ -80,9 +80,8 @@ public class ListeCartes implements Iterable<Carte>, Serializable {
 				continue;
 			}
 			
-			if (nom != null && !nom.trim().isEmpty()) {
+			if (nomCritere != null) {
 				String nomCarte = Normalizer.normalize(c.getNom().toUpperCase(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-				String nomCritere = Normalizer.normalize(nom.toUpperCase().trim(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 				
 				if (!nomCarte.contains(nomCritere)) {
 					continue;
@@ -92,6 +91,7 @@ public class ListeCartes implements Iterable<Carte>, Serializable {
 			res.ajouterCarte(c);
 		}
 		
+		res.sort();
 		return res;
 	}
 	
